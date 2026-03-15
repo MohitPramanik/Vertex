@@ -1,0 +1,47 @@
+<div class="sidebar h-full w-[14rem] bg-blue-400" [class.sidebar-close]="isSidebarOpen()">
+
+    <div class="flex flex-col relative w-[14rem] h-full">
+        <button (click)="toggleSidebar()" class="toggle-btn sticky top-0 w-full bg-blue-500 py-2 px-3 text-white cursor-pointer text-right z-100">
+            @if(isSidebarOpen()) {
+                <i class="fa-solid fa-chevron-right"></i>
+            } @else {
+                <i class="fa-solid fa-chevron-left"></i>
+            }
+            
+        </button>
+
+        <ul class="overflow-y-auto">
+            @for(menu of filteredOptions(); track menu.title) {
+                <li class="sidebar-list-item">
+                    @if(menu.path) {
+                        <a class="slidebar-link" routerLink="{{menu.path}}">
+                            <i class="fa-solid" [class]="menu.icon"></i>
+                            <span class="ml-2">{{menu.title}}</span>
+                        </a>
+                    }
+                    @else if(menu.children) {
+                        <details>
+                            <summary class="px-4 py-2">
+                                <span class="arrow-icon">
+                                    <i class="fa-solid fa-chevron-right"></i>
+                                </span>
+                                <i class="fa-solid" [class]="menu.icon"></i>
+                            <span class="ml-2">{{menu.title}}</span> 
+                            </summary>
+                            @for(item of menu.children; track item.title) {
+                                <li>
+                                    <a class="slidebar-link" routerLink="{{item.path}}">
+                                        <i class="fa-solid fa-link"></i>
+                                        <span class="ml-2">{{item.title}}</span>
+                                    </a>
+                                </li>
+                            }
+                        </details>
+                    }
+                </li>
+            }
+        </ul>
+
+
+    </div>
+</div>

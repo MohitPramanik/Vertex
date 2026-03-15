@@ -1,0 +1,104 @@
+@use "tailwindcss";
+
+.sidebar {
+    transition: all 0.5s;
+    position: relative;
+
+    &::-webkit-scrollbar {
+        width: 4px;
+    }
+
+    /* Scrollbar track */
+    &::-webkit-scrollbar-track {
+        background: #f1f1f1;
+    }
+
+    /* Scrollbar thumb */
+    &::-webkit-scrollbar-thumb {
+        background: #5cc0c7;
+        border-radius: 6px;
+    }
+
+    /* Hover effect */
+    &::-webkit-scrollbar-thumb:hover {
+        background: #5cc0c7;
+    }
+
+    &.sidebar-close {
+        width: 3rem;
+        overflow: hidden;
+
+        .sidebar-list-item {
+
+            a,
+            details {
+                span {
+                    transform: translateX(-100%);
+                    opacity: 0;
+                    transition: all 1s;
+                }
+            }
+
+            &:hover {
+
+                a,
+                summary {
+                    padding-left: 1rem !important;
+                }
+            }
+        }
+
+        .toggle-btn {
+            width: 3rem;
+            transition: width 0.5s;
+        }
+    }
+
+    details a {
+        border-top: 1px solid #92caf6;
+    }
+
+    summary {
+        list-style: none;
+        position: relative;
+        transition: padding-left 0.2s linear;
+
+        .arrow-icon {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            opacity: 0;
+            font-size: 70%;
+        }
+
+        &:hover {
+            padding-left: 2rem;
+
+            .arrow-icon {
+                opacity: 1;
+                transform: translateX(-150%) translateY(-50%);
+                transition: 0.2s linear;
+            }
+        }
+    }
+
+    .sidebar-list-item {
+        a {
+            transition: padding-left 0.2s linear;
+        }
+
+        &:hover {
+            a {
+                padding-left: 2rem;
+            }
+        }
+    }
+
+    .sidebar-list-item {
+        @apply bg-blue-400 text-white border-b-1 border-black hover:bg-blue-600 cursor-pointer;
+
+        .slidebar-link {
+            @apply px-4 py-2 inline-block w-full h-full;
+        }
+    }
+}

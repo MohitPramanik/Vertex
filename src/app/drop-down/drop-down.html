@@ -1,0 +1,15 @@
+<div class="dropdown">
+    <button class="dropbtn">
+        <ng-content select="dropdown-label">
+            Button
+        </ng-content>
+    </button>
+
+    <div class="dropdown-content right-0">
+        <ul class="list-wrapper">
+            <ng-content select="dropdown-content">
+                <li>Dropdown item</li>
+            </ng-content>
+        </ul>
+    </div>
+</div>

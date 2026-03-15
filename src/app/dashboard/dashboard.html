@@ -1,0 +1,111 @@
+<!-- Toggle buttons for manager only -->
+@if(role() === "Manager" || role() === "HR" || role() === "Admin") {
+<div class="flex justify-center items-center flex-wrap gap-5 w-full">
+	<button class="btn dashboard-card-toggle-btn" (click)="cardDataSelection.set('self')">Personal</button>
+	<button class="btn dashboard-card-toggle-btn" (click)="cardDataSelection.set('team')">Organization</button>
+</div>
+}
+
+<!-- Dashboard Cards -->
+@for(card of cardData(); track card.title) {
+<div class="app-dashboard-card" [title]="card.title" [subTitle]="card.subTitle ?? ''">{{card.data}}</div>
+}
+
+<!-- Quick buttons -->
+<div class="flex justify-center items-center flex-wrap gap-5 w-full mt-8">
+	@if(role() === "Manager" && cardDataSelection() === "team") {
+		<button class="btn">View Leave Requests</button>
+		<button class="btn">
+			Generate Team Report
+			<i class="fa-solid fa-download ml-2"></i>
+		</button>
+	} 
+	@else if(role() === "HR" && cardDataSelection() === "team") {
+		<button class="btn">View Requests</button>
+		<button class="btn">Recruitment Overview</button>
+	} 
+	@else if(role() === "Admin" && cardDataSelection() === "team") {
+		<button class="btn">Manage Users</button>
+		<button class="btn">
+			System Report
+			<i class="fa-solid fa-download ml-2"></i>
+		</button>
+	}
+	@else {
+		<button class="btn">Mark Attendance</button>
+		<button class="btn">
+			Current Month Payslip
+			<i class="fa-solid fa-download ml-2"></i>
+		</button>
+	}
+
+</div>
+
+<hr class="section-separator mt-8 mb-4 w-full" />
+
+@if(role() === "SuperAdmin") {
+	<!-- System Activity Table -->
+	<section 
+		class="w-full"
+		app-table 
+		[tableLabel]="'System Activity'" 
+		[headerButtonLabel]="'View All'"
+		[tableHeaders]="['User', 'Action', 'Date']" 
+		[tableData]="systemActivity"
+		[tableDataSequence]="['user', 'action', 'date']"
+	></section>
+
+	<hr class="section-separator mt-8 mb-4 w-full" />
+
+	<!-- Employee Activity Table -->
+	<section 
+		class="w-full"
+		app-table 
+		[tableLabel]="'Employee Activity'" 
+		[headerButtonLabel]="'View All'"
+		[tableHeaders]="['Employee', 'Activity', 'Date']" 
+		[tableData]="employeeActivity"
+		[tableDataSequence]="['employee', 'activity', 'date']"
+	></section>
+
+	<hr class="section-separator mt-8 mb-4 w-full" />
+
+	<!-- Recruitments for current year -->
+	<section 
+		class="w-full"
+		app-table 
+		[tableLabel]="'Recruitments for current year'" 
+		[tableHeaders]="['Role', 'Applicants', 'Interviewing', 'Selected']" 
+		[tableData]="recruitmentOverview"
+		[tableDataSequence]="['role', 'applicants', 'interviewing', 'selected']"
+	></section>
+
+	<hr class="section-separator mt-8 mb-4 w-full" />
+}
+
+
+@if(role() !== "SuperAdmin") {
+	 <!-- Leave Table -->
+	 <section 
+		 class="w-full"
+		 app-table 
+		 [tableLabel]="'Leave Requests'" 
+		 [headerButtonLabel]="'Apply'"
+		 [tableHeaders]="['Leave Type', 'Date', 'Status']" 
+		 [tableData]="leaveData"
+		 [tableDataSequence]="['leaveType', 'date', 'status']"
+		 [tableButtonLabel]="'SEE MORE'"
+	 ></section>
+	 
+	 <hr class="section-separator mt-8 mb-4 w-full" />
+}
+
+<!-- Upcoming 4 holidays table -->
+<section 
+	class="w-full"
+	app-table 
+	[tableLabel]="'Upcoming holidays'" 
+	[tableHeaders]="['Holiday', 'Date']" 
+	[tableData]="holidays"
+	[tableDataSequence]="['name', 'date']"
+></section>

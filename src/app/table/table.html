@@ -1,0 +1,41 @@
+<div class="mb-4 flex justify-between items-center">
+    <h2 class="sm:text-2xl text-xl font-extrabold">{{tableLabel()}}</h2>
+    @if(headerButtonLabel()) {
+        <button class="btn" (click)="headerButtonAction()">{{headerButtonLabel()}}</button>
+    }
+</div>
+
+<div class="w-full overflow-auto table-wrapper">
+    <table class="table table-auto overflow-x-scroll">
+        <thead>
+            <tr>
+                @for(tableHeader of tableHeaders(); track tableHeader) {
+                    <th [class]="isTuple(tableHeader) ? tableHeader[1] : ''">
+                        {{ isTuple(tableHeader) ? tableHeader[0] : tableHeader }}
+                    </th>
+                }
+            </tr>
+        </thead>
+        <tbody class="table-body">
+            @for(data of tableData(); track $index; let i = $index) {
+                <tr>
+                    @for(item of tableDataSequence(); track item) {
+                        <td [class.text-center!]="item === '#'">{{data[item] ?? (item === "#" ? i+1 : '')}}</td>
+                    }
+                </tr>
+            } @empty {
+                <tr>
+                    <td [attr.colspan]="tableHeaders().length" class="empty-table">
+                        No Records Found
+                    </td>
+                </tr>
+            }
+        <!-- <ng-content /> -->
+        </tbody>
+    </table>
+</div>
+
+
+@if(tableButtonLabel() && tableData().length) {
+    <button class="table-bottom-btn" (click)="tableButtonAction()">{{tableButtonLabel()}}</button>
+}

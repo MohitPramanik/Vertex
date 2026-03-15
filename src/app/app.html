@@ -1,0 +1,12 @@
+<div class="flex flex-col h-dvh">
+    <header class="header sticky top-0 z-200" app-header></header>
+    <div class="flex flex-1 overflow-hidden">
+        <div class="h-full" app-sidebar></div>
+        <div class="flex-1 overflow-y-scroll app-content-area">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+    <footer class="text-center bg-black text-white text-xs px-3 py-2 relative" >
+        © 2026 Your Company Name. All rights reserved.
+    </footer>
+</div>

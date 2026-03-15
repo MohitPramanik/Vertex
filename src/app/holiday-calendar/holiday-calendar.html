@@ -1,0 +1,10 @@
+<div class="sm:px-8 px-4 py-5">
+    <section 
+        app-table 
+        [tableLabel]="'Holiday Calendar'" 
+        [tableHeaders]="[['#', 'text-center!'], 'Holiday Name', 'Date', 'Day', 'Description']"
+        [tableData]="holidays"
+        [tableDataSequence]="['#','name', 'date', 'day', 'description']"
+    >
+    </section>
+</div>
