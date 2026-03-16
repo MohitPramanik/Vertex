@@ -1,0 +1,70 @@
+@use "tailwindcss";
+
+.card {
+  @apply bg-white border border-gray-300 rounded-md p-4 shadow-sm;
+}
+
+.summary {
+  @apply flex gap-3 flex-wrap justify-end;
+}
+
+.sum {
+  @apply bg-white border border-gray-300 rounded-md px-3 py-2 shadow-sm min-w-[9rem];
+
+  &.net {
+    @apply border-blue-400;
+  }
+}
+
+.label {
+  @apply text-xs text-gray-600 font-semibold;
+}
+
+.value {
+  @apply text-lg font-extrabold;
+}
+
+.panel {
+  @apply border border-gray-200 rounded-md p-3 bg-gray-50;
+}
+
+.panel-head {
+  @apply flex justify-between items-center mb-2;
+}
+
+.panel-title {
+  @apply font-bold;
+}
+
+.rows {
+  @apply flex flex-col gap-2;
+}
+
+.row {
+  @apply grid gap-2 items-center;
+  grid-template-columns: 1fr 9rem 2.5rem;
+}
+
+.control {
+  @apply p-2 border rounded bg-white;
+}
+
+.amount {
+  @apply text-right;
+}
+
+.icon-btn {
+  @apply border rounded bg-white h-10 w-10 flex items-center justify-center cursor-pointer hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed;
+}
+
+.alert {
+  @apply mt-3 px-3 py-2 rounded-md text-sm;
+
+  &.error {
+    @apply bg-red-50 text-red-700 border border-red-200;
+  }
+  &.success {
+    @apply bg-green-50 text-green-700 border border-green-200;
+  }
+}
+

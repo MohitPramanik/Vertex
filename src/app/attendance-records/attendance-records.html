@@ -1,0 +1,90 @@
+<div class="flex justify-between items-center mb-4">
+  <div>
+    <h2 class="sm:text-2xl text-xl font-extrabold">Attendance analytics</h2>
+    <p class="text-sm text-gray-700">
+      Employee: <span class="font-semibold">{{ attendanceStore.currentEmployee().name }}</span>
+      <span class="text-gray-600">({{ attendanceStore.currentEmployee().id }})</span>
+    </p>
+  </div>
+  <a routerLink="/attendance" class="btn">Open calendar</a>
+</div>
+
+<div class="toolbar">
+  <div class="field">
+    <label for="month">Month</label>
+    <input id="month" type="month" class="control" [(ngModel)]="monthValue" />
+  </div>
+  <div class="hint">
+    <span class="text-gray-700 text-sm">Tip: submit timesheets from the calendar to populate analytics.</span>
+  </div>
+</div>
+
+<div class="kpi-grid">
+  <div class="kpi-card">
+    <div class="kpi-title">Days logged</div>
+    <div class="kpi-value">{{kpis().totalDays}}</div>
+  </div>
+  <div class="kpi-card">
+    <div class="kpi-title">Total hours</div>
+    <div class="kpi-value">{{kpis().totalHours}}</div>
+  </div>
+  <div class="kpi-card">
+    <div class="kpi-title">Avg hours/day</div>
+    <div class="kpi-value">{{kpis().avgHours}}</div>
+  </div>
+  <div class="kpi-card">
+    <div class="kpi-title">Projects</div>
+    <div class="kpi-value">{{kpis().projects}}</div>
+  </div>
+</div>
+
+<div class="grid sm:grid-cols-2 grid-cols-1 gap-4 mt-5">
+  <div class="panel">
+    <h3 class="panel-title">Daily hours</h3>
+    <div class="bar-list">
+      @for(e of monthEntries(); track e.id) {
+        <div class="bar-row">
+          <div class="bar-meta">
+            <div class="bar-date">{{e.date}}</div>
+            <div class="bar-project">{{e.project}}</div>
+          </div>
+          <div class="bar-track">
+            <div class="bar-fill" [style.width.%]="(e.hours / maxHours()) * 100"></div>
+          </div>
+          <div class="bar-hours">{{e.hours}}h</div>
+        </div>
+      } @empty {
+        <div class="empty">No entries for this month.</div>
+      }
+    </div>
+  </div>
+
+  <div class="panel">
+    <h3 class="panel-title">Project summary</h3>
+    <div class="w-full overflow-auto table-wrapper">
+      <table class="table table-auto">
+        <thead>
+          <tr>
+            <th>Project</th>
+            <th class="text-right">Days</th>
+            <th class="text-right">Hours</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for(r of projectSummary(); track r.project) {
+            <tr>
+              <td class="font-semibold">{{r.project}}</td>
+              <td class="text-right">{{r.days}}</td>
+              <td class="text-right">{{r.hours}}</td>
+            </tr>
+          } @empty {
+            <tr>
+              <td class="empty-table" [attr.colspan]="3">No Records Found</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+

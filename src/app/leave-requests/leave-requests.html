@@ -1,0 +1,80 @@
+<div class="flex justify-between items-center mb-4">
+  <div>
+    <h2 class="sm:text-2xl text-xl font-extrabold">Leave requests</h2>
+    <p class="text-sm text-gray-700">Pending: <span class="font-semibold">{{leaveStore.pendingCount()}}</span></p>
+  </div>
+  <a routerLink="/leave/apply" class="btn">Apply leave</a>
+</div>
+
+<div class="filters">
+  <input
+    type="text"
+    class="filter-field"
+    placeholder="Search by request ID, employee ID, or name"
+    [(ngModel)]="queryValue"
+  />
+
+  <select class="filter-field" [(ngModel)]="typeFilterValue">
+    @for(t of leaveTypes; track t) {
+      <option [ngValue]="t">{{t}}</option>
+    }
+  </select>
+
+  <select class="filter-field" [(ngModel)]="statusFilterValue">
+    @for(s of statusTypes; track s) {
+      <option [ngValue]="s">{{s}}</option>
+    }
+  </select>
+</div>
+
+<div class="w-full overflow-auto table-wrapper">
+  <table class="table table-auto">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Employee</th>
+        <th>Type</th>
+        <th>From</th>
+        <th>To</th>
+        <th class="text-right">Days</th>
+        <th>Status</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for(r of filteredRequests(); track r.id) {
+        <tr>
+          <td class="whitespace-nowrap font-semibold">{{r.id}}</td>
+          <td class="min-w-[14rem]">
+            <div class="font-semibold">{{r.employee.name}}</div>
+            <div class="text-xs text-gray-600">{{r.employee.id}}</div>
+          </td>
+          <td>{{r.type}}</td>
+          <td class="whitespace-nowrap">{{r.startDate}}</td>
+          <td class="whitespace-nowrap">{{r.endDate}}</td>
+          <td class="text-right">{{r.days}}</td>
+          <td>
+            <span class="status" [class]="r.status.toLowerCase()">{{r.status}}</span>
+          </td>
+          <td class="min-w-[14rem]">
+            @if(r.status === 'Pending') {
+              <div class="flex gap-2 flex-wrap">
+                <button type="button" class="action-btn approve" (click)="approve(r.id)">Approve</button>
+                <button type="button" class="action-btn reject" (click)="reject(r.id)">Reject</button>
+                @if(r.employee.id === leaveStore.currentEmployee().id) {
+                  <button type="button" class="action-btn cancel" (click)="cancel(r.id)">Cancel</button>
+                }
+              </div>
+            } @else {
+              <span class="text-gray-600 text-sm">—</span>
+            }
+          </td>
+        </tr>
+      } @empty {
+        <tr>
+          <td class="empty-table" [attr.colspan]="8">No Requests Found</td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>

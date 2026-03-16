@@ -5,15 +5,14 @@ import { Component, ViewEncapsulation } from '@angular/core';
   template: `<ng-content></ng-content>`
 })
 
-export class DropDownLabel { }
+export class DropDownLabel {}
 
 @Component({
   selector: "dropdown-content",
   template: `<ng-content></ng-content>`,
 })
 
-export class DropDownContent {
-}
+export class DropDownContent {}
 
 
 @Component({

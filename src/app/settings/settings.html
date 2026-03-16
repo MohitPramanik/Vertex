@@ -1,0 +1,28 @@
+<div class="flex justify-between items-center mb-4">
+  <div>
+    <h2 class="sm:text-2xl text-xl font-extrabold">Settings</h2>
+    <p class="text-sm text-gray-700">Configure system preferences and admin tools</p>
+  </div>
+  <a routerLink="/profile" class="btn">Profile</a>
+</div>
+
+<div class="grid sm:grid-cols-3 grid-cols-1 gap-4">
+  <a routerLink="/company-setting" class="tile">
+    <div class="tile-icon"><i class="fa-solid fa-building"></i></div>
+    <div class="tile-title">Company settings</div>
+    <div class="tile-sub">Working days, default policies</div>
+  </a>
+
+  <a routerLink="/user/manage" class="tile">
+    <div class="tile-icon"><i class="fa-solid fa-users-gear"></i></div>
+    <div class="tile-title">User management</div>
+    <div class="tile-sub">Roles, status, and access</div>
+  </a>
+
+  <a routerLink="/salary-structure" class="tile">
+    <div class="tile-icon"><i class="fa-solid fa-money-check-dollar"></i></div>
+    <div class="tile-title">Payroll</div>
+    <div class="tile-sub">Salary structure editor</div>
+  </a>
+</div>
+

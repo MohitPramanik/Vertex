@@ -1,0 +1,61 @@
+@use "tailwindcss";
+
+$cellSize: calc(100%/7);
+
+.calendar-box {
+    @apply flex flex-col items-center w-full border-x-2 border-y-1 border-black m-auto;
+}
+
+.calendar-cell {
+    @apply inline-block text-center border-1 border-black py-1;
+    width: $cellSize;
+    font-size: 80%;
+}
+
+.calendar-body {
+
+    &>div {
+        display: flex;
+    }
+
+    .calendar-cell {
+        @apply flex items-center justify-center py-4;
+        font-size: 2rem;
+        cursor: pointer;
+
+        &.disabled-box {
+            color: gray;
+            pointer-events: none;
+
+            &:hover {
+                background-color: inherit;
+            }
+        }
+
+        &:hover {
+            background-color: rgb(207, 205, 205);
+        }
+
+        &.logged:not(.disabled-box) {
+            background-color: #eaf7ee;
+            position: relative;
+
+            &::after {
+                content: "";
+                width: 0.6rem;
+                height: 0.6rem;
+                border-radius: 9999px;
+                background: #16a34a;
+                position: absolute;
+                bottom: 0.4rem;
+                right: 0.4rem;
+            }
+        }
+
+        @media (max-width: 600px) {
+            font-size: 1rem;
+
+            @apply py-2;
+        }
+    }
+}

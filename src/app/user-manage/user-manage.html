@@ -1,0 +1,106 @@
+<div class="flex justify-between items-center mb-4">
+  <div>
+    <h2 class="sm:text-2xl text-xl font-extrabold">User management</h2>
+    <p class="text-sm text-gray-700">
+      Active users: <span class="font-semibold">{{store.activeCount()}}</span>
+    </p>
+  </div>
+  <div class="flex gap-2">
+    <a routerLink="/settings" class="btn">Back</a>
+    <button type="button" class="btn alt" (click)="resetSeed()">Reset demo</button>
+  </div>
+</div>
+
+<div class="card mb-4">
+  <div class="flex flex-wrap gap-3 items-end">
+    <div class="field flex-1 min-w-[220px]">
+      <label for="query">Search</label>
+      <input id="query" class="control" type="text" [value]="queryValue" (input)="queryValue = ($any($event.target).value)" placeholder="ID, name, email, role, status" />
+    </div>
+  </div>
+</div>
+
+<form class="card" [formGroup]="addForm" (ngSubmit)="addUser()">
+  <div class="flex justify-between items-center mb-2">
+    <h3 class="font-bold text-lg">Add user</h3>
+  </div>
+
+  <div class="grid sm:grid-cols-5 grid-cols-1 gap-3">
+    <div class="field">
+      <label for="id">Employee ID</label>
+      <input id="id" class="control" type="text" formControlName="id" placeholder="EMP004" />
+    </div>
+    <div class="field sm:col-span-2">
+      <label for="name">Name</label>
+      <input id="name" class="control" type="text" formControlName="name" />
+    </div>
+    <div class="field sm:col-span-2">
+      <label for="email">Email</label>
+      <input id="email" class="control" type="email" formControlName="email" />
+    </div>
+    <div class="field">
+      <label for="role">Role</label>
+      <select id="role" class="control" formControlName="role">
+        @for(r of roles; track r) { <option [value]="r">{{r}}</option> }
+      </select>
+    </div>
+    <div class="field">
+      <label for="status">Status</label>
+      <select id="status" class="control" formControlName="status">
+        @for(s of statuses; track s) { <option [value]="s">{{s}}</option> }
+      </select>
+    </div>
+  </div>
+
+  @if(error()) {
+    <div class="alert error">{{error()}}</div>
+  }
+
+  <div class="flex justify-end mt-3">
+    <button type="submit" class="btn">Add</button>
+  </div>
+</form>
+
+<div class="w-full overflow-auto table-wrapper mt-4">
+  <table class="table table-auto">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Role</th>
+        <th>Status</th>
+        <th>Updated</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for(u of users(); track u.id) {
+        <tr>
+          <td class="font-semibold whitespace-nowrap">{{u.id}}</td>
+          <td class="min-w-[12rem]">{{u.name}}</td>
+          <td class="min-w-[16rem]">{{u.email}}</td>
+          <td>
+            <select class="mini-select" [value]="u.role" (change)="updateRole(u.id, $any($event.target).value)">
+              @for(r of roles; track r) { <option [value]="r">{{r}}</option> }
+            </select>
+          </td>
+          <td>
+            <select class="mini-select" [value]="u.status" (change)="updateStatus(u.id, $any($event.target).value)">
+              @for(s of statuses; track s) { <option [value]="s">{{s}}</option> }
+            </select>
+          </td>
+          <td class="whitespace-nowrap text-sm text-gray-700">{{(u.updatedAt ?? u.createdAt).slice(0, 10)}}</td>
+          <td>
+            <button type="button" class="danger" (click)="remove(u.id)">Remove</button>
+          </td>
+        </tr>
+      } @empty {
+        <tr>
+          <td class="empty-table" [attr.colspan]="7">No Users Found</td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>
+

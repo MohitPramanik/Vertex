@@ -1,0 +1,27 @@
+<div class="p-4">
+
+    <section 
+        app-table 
+        [tableLabel]="'Employees List'"
+        [tableHeaders]="['Employee ID', 'Name', 'Email', 'Department', 'Designation', 'Reporting Manager', 'Joining Date', 'Actions', 'Status']"
+        [tableData]="employeesList"
+        [tableDataSequence]="['employeeId', 'name', 'email', 'department', 'role', 'manager', 'joiningDate', '', ['status', 'text-red-500']]"
+    >
+        @if(restrictExport()) {
+            <div th-action-area>
+                <select 
+                    class="border border-1 border-gray-300 px-3 py-2 rounded-sm cursor-pointer" 
+                    (change)="handleActionSelection($event)"
+                >
+                    <option value="" disabled selected>Action</option>
+                    <option value="addEmp">Add Employee</option>
+                    <option value="export">Export Data</option>
+                </select>
+            </div>
+        }
+        <div th-content-area>
+            <div app-employee-filter></div>
+        </div>
+    </section>
+
+</div>

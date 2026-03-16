@@ -19,7 +19,7 @@ interface sidebarOptionsType {
 })
 export class Sidebar {
 
-  role = signal<string>("Admin");
+  role = signal<string>("Employee");
   isSidebarOpen = signal<boolean>(true);
 
   SIDEBAR_KEYS = {
@@ -35,7 +35,6 @@ export class Sidebar {
     SETTINGS: "System Settings",
     HOLIDAY: "Holiday Calendar"
   };
-
 
   // Admin will have all the options present
   employeeAccess = [
@@ -75,8 +74,8 @@ export class Sidebar {
       title: this.SIDEBAR_KEYS.ATTENDANCE,
       icon: "fa-address-book",
       children: [
-        { title: "Mark Attendance", path: "/attendance" },
-        { title: "Attendance Records", path: "/attendance/records" }
+        { title: "Log", path: "/attendance" },
+        { title: "Analytics", path: "/attendance/records" }
       ],
     },
     {
@@ -136,18 +135,7 @@ export class Sidebar {
     }
   })
 
-  constructor() {
-    effect(() => {
-      console.log(this.isSidebarOpen())
-
-    })
-  }
-
   toggleSidebar() {
     this.isSidebarOpen.update(v => !v)
   }
-
-
-
-
 }

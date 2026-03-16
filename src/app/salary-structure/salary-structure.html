@@ -1,0 +1,77 @@
+<div class="flex justify-between items-center mb-4">
+  <div>
+    <h2 class="sm:text-2xl text-xl font-extrabold">Salary structure</h2>
+    <p class="text-sm text-gray-700">
+      Employee: <span class="font-semibold">{{store.structure().employeeName}}</span>
+      <span class="text-gray-600">({{store.structure().employeeId}})</span>
+    </p>
+  </div>
+  <div class="summary">
+    <div class="sum">
+      <div class="label">Gross</div>
+      <div class="value">₹{{gross()}}</div>
+    </div>
+    <div class="sum">
+      <div class="label">Deductions</div>
+      <div class="value">₹{{totalDeductions()}}</div>
+    </div>
+    <div class="sum net">
+      <div class="label">Net</div>
+      <div class="value">₹{{net()}}</div>
+    </div>
+  </div>
+</div>
+
+<form class="card" [formGroup]="form" (ngSubmit)="save()">
+  <div class="grid sm:grid-cols-2 grid-cols-1 gap-4">
+    <div class="panel">
+      <div class="panel-head">
+        <h3 class="panel-title">Earnings</h3>
+        <button type="button" class="btn" (click)="addEarning()">Add</button>
+      </div>
+
+      <div class="rows" formArrayName="earnings">
+        @for(g of form.controls.earnings.controls; track $index; let i = $index) {
+          <div class="row" [formGroupName]="i">
+            <input class="control" type="text" formControlName="label" placeholder="Component" />
+            <input class="control amount" type="number" formControlName="amount" placeholder="Amount" />
+            <button type="button" class="icon-btn" (click)="removeEarning(i)" [disabled]="form.controls.earnings.length <= 1">
+              <i class="fa-solid fa-trash"></i>
+            </button>
+          </div>
+        }
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head">
+        <h3 class="panel-title">Deductions</h3>
+        <button type="button" class="btn" (click)="addDeduction()">Add</button>
+      </div>
+
+      <div class="rows" formArrayName="deductions">
+        @for(g of form.controls.deductions.controls; track $index; let i = $index) {
+          <div class="row" [formGroupName]="i">
+            <input class="control" type="text" formControlName="label" placeholder="Component" />
+            <input class="control amount" type="number" formControlName="amount" placeholder="Amount" />
+            <button type="button" class="icon-btn" (click)="removeDeduction(i)" [disabled]="form.controls.deductions.length <= 1">
+              <i class="fa-solid fa-trash"></i>
+            </button>
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+
+  @if(error()) {
+    <div class="alert error">{{error()}}</div>
+  }
+  @if(saved()) {
+    <div class="alert success">Saved. Updated at {{store.structure().updatedAt.slice(0, 19).replace('T', ' ')}}.</div>
+  }
+
+  <div class="flex justify-end mt-4">
+    <button type="submit" class="btn">Save structure</button>
+  </div>
+</form>
+

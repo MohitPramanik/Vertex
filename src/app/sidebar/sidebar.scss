@@ -3,6 +3,7 @@
 .sidebar {
     transition: all 0.5s;
     position: relative;
+    overflow: auto;
 
     &::-webkit-scrollbar {
         width: 4px;
@@ -50,12 +51,16 @@
 
         .toggle-btn {
             width: 3rem;
-            transition: width 0.5s;
         }
+    }
+
+    .toggle-btn {
+        transition: width 0.5s;
     }
 
     details a {
         border-top: 1px solid #92caf6;
+        padding-left: 3rem !important;
     }
 
     summary {
@@ -83,6 +88,8 @@
     }
 
     .sidebar-list-item {
+        @apply bg-blue-400 text-white border-b-1 border-black hover:bg-blue-600 cursor-pointer;
+
         a {
             transition: padding-left 0.2s linear;
         }
@@ -92,10 +99,6 @@
                 padding-left: 2rem;
             }
         }
-    }
-
-    .sidebar-list-item {
-        @apply bg-blue-400 text-white border-b-1 border-black hover:bg-blue-600 cursor-pointer;
 
         .slidebar-link {
             @apply px-4 py-2 inline-block w-full h-full;

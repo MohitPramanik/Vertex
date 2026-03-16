@@ -1,0 +1,53 @@
+@use "tailwindcss";
+
+.balance-grid {
+  @apply grid sm:grid-cols-4 grid-cols-2 gap-3;
+}
+
+.balance-card {
+  @apply bg-white border border-gray-300 rounded-md p-4 shadow-sm;
+
+  &.unpaid {
+    @apply bg-gray-50;
+  }
+}
+
+.balance-title {
+  @apply text-sm text-gray-700 font-semibold;
+}
+
+.balance-value {
+  @apply text-3xl font-extrabold mt-1;
+}
+
+.balance-sub {
+  @apply text-xs text-gray-600 mt-1;
+}
+
+.filter {
+  @apply p-2 border rounded bg-white min-w-[180px];
+}
+
+.table-wrapper {
+  border: 1px solid #ddd;
+  background: white;
+}
+
+.table {
+  width: 100%;
+  min-width: max-content;
+  border-collapse: collapse;
+
+  th,
+  td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+    vertical-align: top;
+  }
+
+  th {
+    background-color: #b2caff;
+  }
+}
+

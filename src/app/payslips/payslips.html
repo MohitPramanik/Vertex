@@ -1,70 +1,7 @@
-<div class="payslip-page">
-
-  <!-- Page Header -->
-  <div class="page-header">
-    <h2>Payslips</h2>
-  </div>
-
-  <!-- Filters Section -->
-  <div class="filter-section">
-
-    <div class="filter-item">
-      <label>Year</label>
-      <select>
-        <option value="">All</option>
-      </select>
-    </div>
-
-    <div class="filter-item">
-      <label>Month</label>
-      <select>
-        <option value="">All</option>
-      </select>
-    </div>
-
-    <div class="filter-item">
-      <button class="filter-btn">Filter</button>
-    </div>
-
-  </div>
-
-  <!-- Payslip Table -->
-  <div class="table-container">
-
-    <table class="payslip-table">
-
-      <thead>
-        <tr>
-          <th>#</th>
-          <th>Month</th>
-          <th>Year</th>
-          <th>Basic Salary</th>
-          <th>Deductions</th>
-          <th>Net Salary</th>
-          <th>Status</th>
-          <th>Action</th>
-        </tr>
-      </thead>
-
-      <tbody>
-
-        <tr>
-          <td>1</td>
-          <td>January</td>
-          <td>2026</td>
-          <td>₹50,000</td>
-          <td>₹5,000</td>
-          <td>₹45,000</td>
-          <td>Paid</td>
-          <td>
-            <button class="download-btn">Download</button>
-          </td>
-        </tr>
-
-      </tbody>
-
-    </table>
-
-  </div>
-
-</div>
+<section
+  app-table
+  [tableLabel]="'Payslips'"
+  [tableHeaders]="[['#', 'text-center!'], 'Month', 'Year', 'Salary', 'Deduction', 'Net Payable', 'Status', 'Download']"
+  [tableData]="salaryData"
+  [tableDataSequence]="[['#', 'text-center!'],'Month', 'Year', 'Salary', 'Deduction', 'Net Payable', 'Status', 'Download' ]"
+></section>

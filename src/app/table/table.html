@@ -2,8 +2,11 @@
     <h2 class="sm:text-2xl text-xl font-extrabold">{{tableLabel()}}</h2>
     @if(headerButtonLabel()) {
         <button class="btn" (click)="headerButtonAction()">{{headerButtonLabel()}}</button>
-    }
+    } 
+    <ng-content select="[th-action-area]"></ng-content>
 </div>
+
+<ng-content select="[th-content-area]"></ng-content>
 
 <div class="w-full overflow-auto table-wrapper">
     <table class="table table-auto overflow-x-scroll">
@@ -20,7 +23,12 @@
             @for(data of tableData(); track $index; let i = $index) {
                 <tr>
                     @for(item of tableDataSequence(); track item) {
-                        <td [class.text-center!]="item === '#'">{{data[item] ?? (item === "#" ? i+1 : '')}}</td>
+                        <td [class]="isTuple(item) ? item[1] : ''">
+                            <!-- if item = '#', display index(i+1), 
+                                else check if it's tuple then display 0th index 
+                                or if it's string then display item itself -->
+                            {{ item === "#" ? i+1 : ( isTuple(item) ? ( item[0] === "#" ? i+1 : data[item[0]]) : data[item]) }}
+                        </td>
                     }
                 </tr>
             } @empty {
@@ -30,7 +38,6 @@
                     </td>
                 </tr>
             }
-        <!-- <ng-content /> -->
         </tbody>
     </table>
 </div>

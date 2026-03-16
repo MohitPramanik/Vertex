@@ -43,7 +43,7 @@ export class DashboardCard {
 })
 export class Dashboard {
 
-  role = signal<Role>("SuperAdmin");
+  role = signal<Role>("Manager");
   cardDataSelection = signal<CardDataSelection>("self"); // Only Managers, HRs and Admin can udpate
 
   // for each employee including managers, hrs, ... as well

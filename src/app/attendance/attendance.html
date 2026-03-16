@@ -1,0 +1,37 @@
+<div class="flex justify-between items-center mb-5">
+    <h2 class="sm:text-2xl text-xl font-extrabold">Attendance calendar</h2>
+    <a routerLink="/attendance/records" class="btn">View analytics</a>
+</div>
+
+<div class="calendar-box">
+    <div class="calendar-header flex w-full bg-blue-400 text-white font-bold sm:text-xl text-base">
+        @for(day of days; track day) {
+            <span class="calendar-cell">{{day}}</span>
+        }
+    </div>
+
+    <div class="calendar-body w-full">
+        @for(calendarBlock of calendarBlocks; track $index; let blockIndex = $index) {
+            <div>
+                @for(calendarDate of calendarBlock; track $index) {
+                    <button
+                        (click)="handleCellClick(blockIndex, calendarDate)"
+                        [class.disabled-box]="isDisabled(blockIndex, calendarDate)" 
+                        [class.logged]="hasEntry(calendarDate)"
+                        class="calendar-cell"
+                    >
+                        {{calendarDate}}
+                    </button>
+                }
+            </div>
+        }
+    </div>
+</div>
+
+<div 
+    app-attendance-modal 
+    [class.hidden!]="!isTimeSheetModelOpen()" 
+    [class.flex]="isTimeSheetModelOpen()" 
+    [(isTimeSheetModelOpen)]="isTimeSheetModelOpen"
+    [(selectedDate)]="selectedDate"
+></div>

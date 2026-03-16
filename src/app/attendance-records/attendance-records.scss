@@ -1,0 +1,106 @@
+@use "tailwindcss";
+
+.toolbar {
+  @apply flex flex-wrap gap-3 mb-4 p-4 border rounded bg-gray-200 shadow-sm items-end;
+}
+
+.field {
+  @apply flex flex-col gap-1 min-w-[220px];
+
+  label {
+    @apply text-sm font-semibold text-gray-700;
+  }
+}
+
+.control {
+  @apply p-2 border rounded bg-white;
+}
+
+.hint {
+  @apply flex-1 min-w-[240px];
+}
+
+.kpi-grid {
+  @apply grid sm:grid-cols-4 grid-cols-2 gap-3;
+}
+
+.kpi-card {
+  @apply bg-white border border-gray-300 rounded-md p-4 shadow-sm;
+}
+
+.kpi-title {
+  @apply text-sm text-gray-700 font-semibold;
+}
+
+.kpi-value {
+  @apply text-3xl font-extrabold mt-1;
+}
+
+.panel {
+  @apply bg-white border border-gray-300 rounded-md p-4 shadow-sm;
+}
+
+.panel-title {
+  @apply font-bold text-lg mb-3;
+}
+
+.bar-list {
+  @apply flex flex-col gap-3;
+}
+
+.bar-row {
+  @apply grid gap-2 items-center;
+  grid-template-columns: 10rem 1fr 3rem;
+}
+
+.bar-meta {
+  @apply flex flex-col;
+}
+
+.bar-date {
+  @apply text-sm font-semibold;
+}
+
+.bar-project {
+  @apply text-xs text-gray-600;
+}
+
+.bar-track {
+  @apply h-3 bg-gray-200 rounded overflow-hidden;
+}
+
+.bar-fill {
+  @apply h-full bg-blue-600;
+}
+
+.bar-hours {
+  @apply text-right text-sm font-semibold;
+}
+
+.empty {
+  @apply text-sm text-gray-600;
+}
+
+.table-wrapper {
+  border: 1px solid #ddd;
+  background: white;
+}
+
+.table {
+  width: 100%;
+  min-width: max-content;
+  border-collapse: collapse;
+
+  th,
+  td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+    vertical-align: top;
+  }
+
+  th {
+    background-color: #b2caff;
+  }
+}
+

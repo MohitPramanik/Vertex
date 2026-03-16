@@ -8,7 +8,9 @@
 
 <!-- Dashboard Cards -->
 @for(card of cardData(); track card.title) {
-<div class="app-dashboard-card" [title]="card.title" [subTitle]="card.subTitle ?? ''">{{card.data}}</div>
+	<div class="app-dashboard-card" [title]="card.title" [subTitle]="card.subTitle ?? ''">
+		{{card.data}}
+	</div>
 }
 
 <!-- Quick buttons -->
