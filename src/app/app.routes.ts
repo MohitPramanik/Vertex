@@ -20,51 +20,51 @@ export const routes: Routes = [
             {
                 path: "dashboard",
                 loadComponent: () => import("./pages/dashboard/dashboard").then(m => m.Dashboard),
-                title: "HRMS - Dashboard",
+                title: "Vertex - Dashboard",
                 data: { role: ["admin", "manager", "hr", "employee", "superAdmin"] }
             },
             {
                 path: "employees",
                 loadComponent: () => import("./pages/employees/employees").then(m => m.Employees),
-                title: "HRMS - Employees",
+                title: "Vertex - Employees",
                 data: { role: ["admin", "manager", "hr", "employee", "superAdmin"] }
             },
             {
                 path: "attendance",
                 loadComponent: () => import("./pages/attendance/attendance").then(m => m.Attendance),
-                title: "HRMS - Attendance",
+                title: "Vertex - Attendance",
                 canDeactivate: [unsavedChangesGuard],
                 data: { role: ["admin", "manager", "hr", "employee", "superAdmin"] },
                 children: [
                     {
                         path: "records",
                         loadComponent: () => import("./pages/attendance-records/attendance-records").then(m => m.AttendanceRecords),
-                        title: "HRMS - Attendance Records"
+                        title: "Vertex - Attendance Records"
                     },
                 ]
             },
             {
                 path: "payslips",
                 loadComponent: () => import("./pages/payslips/payslips").then(m => m.Payslips),
-                title: "HRMS - Payslips",
+                title: "Vertex - Payslips",
                 data: { role: ["admin", "manager", "hr", "employee", "superAdmin"] }
             },
             {
                 path: "salary-structure",
                 loadComponent: () => import("./pages/salary-structure/salary-structure").then(m => m.SalaryStructurePage),
-                title: "HRMS - Salary Structure",
+                title: "Vertex - Salary Structure",
                 data: { role: ["admin", "manager", "hr", "employee", "superAdmin"] }
             },
             {
                 path: "holiday-list",
                 loadComponent: () => import("./pages/holiday-calendar/holiday-calendar").then(m => m.HolidayCalendar),
-                title: "HRMS - Holiday List",
+                title: "Vertex - Holiday List",
                 data: { role: ["admin", "manager", "hr", "employee", "superAdmin"] }
             },
             {
                 path: "settings",
                 loadComponent: () => import("./pages/settings/settings").then(m => m.Settings),
-                title: "HRMS - Settings",
+                title: "Vertex - Settings",
                 data: { role: ["admin", "manager", "hr", "employee", "superAdmin"] },
                 children: [
                     {
@@ -80,25 +80,25 @@ export const routes: Routes = [
             {
                 path: "notifications",
                 loadComponent: () => import("./pages/notifications/notifications").then(m => m.Notifications),
-                title: "HRMS - Notifications",
+                title: "Vertex - Notifications",
                 data: { role: ["admin", "manager", "hr", "employee", "superAdmin"] }
             },
             {
                 path: "company-setting",
                 loadComponent: () => import("./pages/company-setting/company-setting").then(m => m.CompanySettingPage),
-                title: "HRMS - Organization Settings",
+                title: "Vertex - Organization Settings",
                 canDeactivate: [unsavedChangesGuard],
                 data: { role: "superAdmin" }
             },
             {
                 path: "profile",
                 loadComponent: () => import("./pages/profile/profile").then(m => m.ProfilePage),
-                title: "HRMS - Profile",
+                title: "Vertex - Profile",
                 data: { role: ["admin", "manager", "hr", "employee", "superAdmin"] }
             },
             {
                 path: "leave",
-                title: "HRMS - Leave",
+                title: "Vertex - Leave",
                 data: { role: ["admin", "manager", "hr", "employee", "superAdmin"] },
                 children: [
                     {
@@ -123,25 +123,25 @@ export const routes: Routes = [
                     {
                         path: "jobs",
                         loadComponent: () => import("./pages/jobs/jobs").then(m => m.Jobs),
-                        title: "HRMS - Jobs List"
+                        title: "Vertex - Jobs List"
                     },
                     {
                         path: "candidates",
                         loadComponent: () => import("./pages/candidates/candidates").then(m => m.Candidates),
-                        title: "HRMS - Candidates List"
+                        title: "Vertex - Candidates List"
                     }
                 ]
             },
             {
                 path: "departments",
                 loadComponent: () => import("./pages/departments/departments").then(m => m.Departments),
-                title: "HRMS - Departments",
+                title: "Vertex - Departments",
                 data: { role: "superAdmin" }
             },
             {
                 path: "reports",
                 loadComponent: () => import("./pages/reports/reports").then(m => m.Reports),
-                title: "HRMS - Reports",
+                title: "Vertex - Reports",
                 data: { role: ["admin", "superAdmin"] }
             }
         ]
@@ -159,23 +159,23 @@ export const routes: Routes = [
             {
                 path: "login",
                 loadComponent: () => import("./pages/login/login").then(m => m.Login),
-                title: "HRMS - Login",
+                title: "Vertex - Login",
             },
             {
                 path: "signup",
                 loadComponent: () => import("./pages/signup/signup").then(m => m.Signup),
-                title: "HRMS - Signup",
+                title: "Vertex - Signup",
             },
             {
                 path: "password/reset",
                 loadComponent: () => import("./pages/forgot-password-page/forgot-password-page").then(m => m.ForgotPasswordPage),
-                title: "HRMS - Reset Password"
+                title: "Vertex - Reset Password"
             },
         ]
     },
     {
         path: "**",
         loadComponent: () => import("./pages/not-found-page/not-found-page").then(m => m.NotFoundPage),
-        title: "HRMS - 404 Not Found"
+        title: "Vertex - 404 Not Found"
     }
 ];

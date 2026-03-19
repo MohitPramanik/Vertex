@@ -17,7 +17,6 @@ type ApplyForm = FormGroup<{
   imports: [ReactiveFormsModule, RouterLink],
   templateUrl: './leave-apply.html',
   styleUrl: './leave-apply.scss',
-  host: { class: 'max-w-[68rem] m-auto p-5' },
 })
 export class LeaveApply {
   readonly leaveStore = inject(LeaveStore);

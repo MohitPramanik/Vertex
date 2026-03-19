@@ -9,7 +9,6 @@ import { LeaveStore } from '../leave/leave.store';
   imports: [RouterLink, FormsModule],
   templateUrl: './leave-balance.html',
   styleUrl: './leave-balance.scss',
-  host: { class: 'max-w-[68rem] m-auto p-5' },
 })
 export class LeaveBalance {
   readonly leaveStore = inject(LeaveStore);

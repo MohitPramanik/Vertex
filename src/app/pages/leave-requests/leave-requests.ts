@@ -9,7 +9,6 @@ import { LeaveStore } from '../leave/leave.store';
   imports: [RouterLink, FormsModule],
   templateUrl: './leave-requests.html',
   styleUrl: './leave-requests.scss',
-  host: { class: 'max-w-[68rem] m-auto p-5' },
 })
 export class LeaveRequests {
   readonly leaveStore = inject(LeaveStore);

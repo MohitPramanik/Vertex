@@ -38,7 +38,7 @@ export class ProfilePage {
 
   updatedSkills = computed(() =>
     this.skills().map((skill) => {
-      return { ...skill, experience: `${skill.years} year ${skill.months}.months` }
+      return { ...skill, experience: `${skill.years} year ${skill.months} months` }
     }
   ))
 

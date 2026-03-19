@@ -15,7 +15,6 @@ interface ProjectSummaryRow {
   imports: [RouterLink, FormsModule],
   templateUrl: './attendance-records.html',
   styleUrl: './attendance-records.scss',
-  host: { class: 'max-w-[68rem] m-auto p-5' },
 })
 export class AttendanceRecords {
   readonly attendanceStore = inject(AttendanceStore);
