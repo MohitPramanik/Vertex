@@ -1,0 +1,55 @@
+<!-- Search Input -->
+<form class="filter-section" [formGroup]="searchFilter" (ngSubmit)="onSubmit()">
+  <div class="input-field-wrapper">
+    <select class="form-field" formControlName="searchBy">
+      <option value="" selected disabled>Search By</option>
+      <option>Name</option>
+      <option>Employee ID</option>
+      <option>Email</option>
+      <option>Designation</option>
+      <option>Reporting Manager</option>
+    </select>
+  </div>
+
+  <div class="input-field-wrapper">
+    <input type="text" [placeholder]="searchValuePlaceholder" class="form-field" formControlName="searchValue">
+  </div>
+
+  <!-- Department Filter -->
+  <div class="input-field-wrapper">
+    <select class="form-field" formControlName="department">
+      <option value="all">All Departments</option>
+      <option>Engineering</option>
+      <option>HR</option>
+      <option>Finance</option>
+      <option>Marketing</option>
+      <option>Management</option>
+    </select>
+  </div>
+
+  <!-- Role Filter -->
+  <div class="input-field-wrapper">
+    <select class="form-field" formControlName="role">
+      <option value="all">All Roles</option>
+      <option>Employee</option>
+      <option>Manager</option>
+      <option>HR</option>
+      <option>Admin</option>
+    </select>
+  </div>
+
+  <!-- Status Filter -->
+  <div class="input-field-wrapper">
+    <select class="form-field"formControlName="status">
+      <option value="all">All Status</option>
+      <option>Active</option>
+      <option>Inactive</option>
+    </select>
+  </div>
+
+  <!-- Reset Filters Button -->
+  <div class="flex items-center w-full justify-between">
+    <button type="submit" class="btn">Search</button>
+    <button type="button" class="btn" (click)="searchFilter.reset()">Reset</button>
+  </div>
+</form>

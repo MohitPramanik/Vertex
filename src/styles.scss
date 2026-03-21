@@ -56,7 +56,9 @@ a.btn-outline {
     }
 
     .form-input {
-        @apply border-1 border-black px-3 py-1.5 rounded-md min-h-[2.6rem] focus:outline-none focus:ring-2 focus:ring-blue-500;
+        @apply border-1 border-black px-3 py-1.5 
+            rounded-md min-h-[2.6rem]  bg-white
+            focus:outline-none focus:ring-2 focus:ring-blue-500;
     }
 
     input:not([type="file"]).form-field {
@@ -110,4 +112,12 @@ a.btn-outline {
 
 .card {
   @apply bg-white border border-gray-300 rounded-md p-4 shadow-sm;
+}
+
+.filter-section {
+    @apply flex flex-wrap gap-2 p-2 bg-[#aea4fe];
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 10px;
+    border: 1px solid #00000052;
 }

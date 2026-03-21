@@ -6,22 +6,22 @@
       Welcome Back
     </h2>
 
-    <form class="space-y-4" (ngSubmit)="onSubmit()">
+    <form class="space-y-4" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
 
       <div class="input-field-wrapper">
         <label for="email" class="form-label">Email</label>
-        <input type="email" placeholder="Enter your email" id="email" name="email" [(ngModel)]="email" class="form-field" autocomplete="off">
+        <input type="email" placeholder="Enter your email" id="email" formControlName="email" class="form-field" autocomplete="on">
       </div>
 
       <div class="input-field-wrapper">
         <label for="password" class="form-label">Password</label>
-        <input type="password" placeholder="Enter your password" id="password" name="password" [(ngModel)]="password" class="form-field"
+        <input type="password" placeholder="Enter your password" id="password" formControlName="password" class="form-field"
           autocomplete="off">
       </div>
 
       <div class="input-field-wrapper">
         <label for="remember-box" class="flex items-center gap-2 text-sm">
-          <input type="checkbox" class="h-4 w-4" id="remember-box" autocomplete="off">
+          <input type="checkbox" class="h-4 w-4" id="remember-box" formControlName="remember" autocomplete="off">
           Remember me
         </label>
 

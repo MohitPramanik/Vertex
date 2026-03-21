@@ -1,6 +1,6 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { Table, TableHeaderActionArea, TableHeaderContentArea } from '../../components/table/table';
-import { EmployeeFilter } from '../employee-filter/employee-filter';
+import { ReactiveFormsModule, FormBuilder } from '@angular/forms';
 
 interface Employee {
   employeeId: string;
@@ -13,7 +13,38 @@ interface Employee {
   joiningDate: string;
 };
 
-type Actions = "addEmp" | "exportData" | "";
+@Component({
+  selector: 'div[app-employee-filter]',
+  imports: [ReactiveFormsModule],
+  templateUrl: './employee-filter.html',
+  styleUrl: './employees.scss',
+})
+export class EmployeeFilter {
+
+  private formBuilder = inject(FormBuilder);
+
+  searchFilter = this.formBuilder.nonNullable.group({
+    searchBy: [''],
+    searchValue: [''],
+    department: ['all'],
+    role: ['all'],
+    status: ['all']
+  })
+
+  searchValuePlaceholder = "Enter Name"
+
+  constructor() {
+    this.searchFilter.get("searchBy")?.valueChanges.subscribe(value => {
+      this.searchValuePlaceholder = `Enter ${value}`
+    })
+  }
+
+  onSubmit() {
+    console.log(this.searchFilter.value);
+  }
+
+}
+
 
 @Component({
   selector: 'app-employees',

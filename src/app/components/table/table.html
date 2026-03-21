@@ -38,7 +38,14 @@
                         <!-- if item = '#', display index(i+1), 
                                 else check if it's tuple then display 0th index 
                                 or if it's string then display item itself -->
-                        {{ item === "#" ? i+1 : ( isTuple(item) ? ( item[0] === "#" ? i+1 : data[item[0]]) : data[item])
+                        {{ item === "#" ? 
+                                i+1 : 
+                                ( 
+                                    isTuple(item) ? ( 
+                                        item[0] === "#" ? i+1 : data[item[0]]
+                                    ) : 
+                                    data[item] ?? resolveObject(item, data)
+                                )
                         }}
                     </td>
                     }
@@ -51,14 +58,36 @@
                 </tr>
                 }
             </tbody>
-
         </table>
-
     </div>
+
+    @if(pagination()) {
+        <div class="flex justify-end w-full gap-3 text-gray-500 text-sm px-3 py-4">
+            <div>
+                <label for="">Items per page: </label>
+                <select name="" id="">
+                    <option>10</option>
+                    <option>20</option>
+                    <option>50</option>
+                    <option>100</option>
+                </select>
+            </div>
+
+            <div class="flex gap-2 me-3">
+                <button class="cursor-pointer">
+                    <i class="fa-solid fa-chevron-left"></i>
+                </button>
+                <span>0 of 0</span>
+                <button class="cursor-pointer">
+                    <i class="fa-solid fa-chevron-right"></i>
+                </button>
+            </div>        
+        </div>
+    }
 
     <!-- table bottom button -->
     @if(tableButtonLabel() && tableData().length) {
-        <button class="btn table-bottom-btn" (click)="tableButtonAction()">{{tableButtonLabel()}}</button>
+        <button class="btn table-bottom-btn" (click)="tableButtonActionClicked.emit()">{{tableButtonLabel()}}</button>
     }
 
 </div>

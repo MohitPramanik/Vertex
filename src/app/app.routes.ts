@@ -103,15 +103,15 @@ export const routes: Routes = [
                 children: [
                     {
                         path: "apply",
-                        loadComponent: () => import("./pages/leave-apply/leave-apply").then(m => m.LeaveApply),
+                        loadComponent: () => import("./pages/leave/leave-apply/leave-apply").then(m => m.LeaveApply),
                     },
                     {
                         path: "requests",
-                        loadComponent: () => import("./pages/leave-requests/leave-requests").then(m => m.LeaveRequests),
+                        loadComponent: () => import("./pages/leave/leave-requests/leave-requests").then(m => m.LeaveRequests),
                     },
                     {
                         path: "balance",
-                        loadComponent: () => import("./pages/leave-balance/leave-balance").then(m => m.LeaveBalance),
+                        loadComponent: () => import("./pages/leave/leave-balance/leave-balance").then(m => m.LeaveBalance),
                     },
                 ]
             },

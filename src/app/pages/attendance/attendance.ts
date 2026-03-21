@@ -1,13 +1,13 @@
-import { Component, inject, signal } from "@angular/core";
-import { formatDateOnly } from "./attendance.utils";
-import { AttendanceStore } from "./attendance.store";
+import { Component, inject, output, signal } from "@angular/core";
 import { RouterLink } from "@angular/router";
 import { Modal } from "../../components/modal/modal";
 import { Observable } from "rxjs";
+import { FormBuilder, ReactiveFormsModule } from "@angular/forms";
 
 @Component({
-  selector: "form[attendance-modal-form]",
+  selector: "div[attendance-modal-form]",
   templateUrl: "./attendance-modal-form.html",
+  imports: [ReactiveFormsModule],
   styleUrl: "./attendance.scss",
   host: {
     "class": "w-full"
@@ -15,9 +15,10 @@ import { Observable } from "rxjs";
 })
 
 export class AttendanceModalForm {
-  workHours = Array.from({ length: 12 });
+  workHours = Array.from({ length: 9 });
   projects = ["MLCHC", "Quality Now", "SilverBullet", "Internal"];
   today = new Date();
+  isSubmitted = output<void>();
 
   maxDate = this.formatDate(this.today);
   // min date would be prev 5 days
@@ -38,23 +39,40 @@ export class AttendanceModalForm {
 
     return true;
   }
+
+  private formBuilder = inject(FormBuilder);
+
+  timeSheet = this.formBuilder.nonNullable.group({
+    date: [this.formatDate(this.today)],
+    workHours: [0],
+    project: [''],
+    description: ['']
+  })
+
+  onSubmit() {
+    console.log(this.timeSheet.value);
+    this.isSubmitted.emit();
+  }
+
+  constructor() {
+    console.log(this.formatDate(this.today));
+  }
 }
 
 @Component({
   selector: "section[attendance-calendar]",
   templateUrl: "./attendance.html",
   styleUrl: "./attendance.scss",
-  imports: [RouterLink, Modal, AttendanceModalForm],
+  imports: [Modal, AttendanceModalForm],
 })
 
 export class Attendance {
-  private readonly attendanceStore = inject(AttendanceStore);
+  // private readonly attendanceStore = inject(AttendanceStore);
   calendarDays: string[] = []
   calendarBlocks: string[][] = [];
   days: string[] = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
   today = new Date();
   isTimeSheetModelOpen = signal<boolean>(false);
-  selectedDate = signal<string>(formatDateOnly(new Date()));
 
   constructor() {
     let currentMonthStartDayIndex = (new Date(this.today.getFullYear(), this.today.getMonth(), 1)).getDay();
@@ -99,8 +117,6 @@ export class Attendance {
 
   handleCellClick(i: number, calendarDate: string) {
     if (!this.isDisabled(i, calendarDate)) {
-      const dateOnly = formatDateOnly(new Date(this.today.getFullYear(), this.today.getMonth(), Number(calendarDate)));
-      this.selectedDate.set(dateOnly);
       this.isTimeSheetModelOpen.set(true);
     }
   }
@@ -108,11 +124,5 @@ export class Attendance {
   handleCloseBtnClick() {
     this.isTimeSheetModelOpen.set(false);
   }
-
-  hasEntry(calendarDate: string): boolean {
-    const dateOnly = formatDateOnly(new Date(this.today.getFullYear(), this.today.getMonth(), Number(calendarDate)));
-    return !!this.attendanceStore.getCurrentEmployeeEntryByDate(dateOnly);
-  }
-
 
 }

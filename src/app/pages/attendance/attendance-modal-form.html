@@ -1,35 +1,39 @@
-<div class="sm:flex w-full gap-2 items-center h-max">
-    <div class="input-field-wrapper sm:w-1/2!">
-        <label for="date">Date</label>
-        <input type="date" id="date" class="form-field" [max]="maxDate" [min]="minDate" formControlName="date">
+<form [formGroup]="timeSheet" (ngSubmit)="onSubmit()">
+
+    <div class="sm:flex w-full gap-2 items-center h-max">
+        <div class="input-field-wrapper sm:w-1/2!">
+            <label for="date">Date</label>
+            <input type="date" id="date" class="form-field" [min]="minDate" formControlName="date">
+        </div>
+
+        <div class="input-field-wrapper sm:w-1/2! inline-block">
+            <label for="work-hours">Working hours</label>
+            <select id="work-hours" class="form-field" formControlName="workHours">
+                <option value="0" disabled selected>Select</option>
+                @for(item of workHours; track $index; let i = $index) {
+                <option [value]="i+1">{{i + 1}} Hours</option>
+                }
+            </select>
+        </div>
     </div>
 
-    <div class="input-field-wrapper sm:w-1/2! inline-block">
-        <label for="work-hours">Working hours</label>
-        <select id="work-hours" class="form-field" formControlName="hours">
+    <div class="input-field-wrapper">
+        <label for="project">Project</label>
+        <select id="project" class="form-field" formControlName="project">
             <option value="" disabled selected>Select</option>
-            @for(item of workHours; track $index; let i = $index) {
-            <option [value]="i+1">{{i + 1}} Hours</option>
+            @for(item of projects; track item) {
+            <option value="{{item}}">{{item}}</option>
             }
         </select>
     </div>
-</div>
 
-<div class="input-field-wrapper">
-    <label for="project">Project</label>
-    <select id="project" class="form-field" formControlName="project">
-        <option value="" disabled selected>Select</option>
-        @for(item of projects; track item) {
-        <option value="{{item}}">{{item}}</option>
-        }
-    </select>
-</div>
+    <div class="input-field-wrapper">
+        <label for="description">Description</label>
+        <textarea id="description" class="form-field" rows="5" formControlName="description"></textarea>
+    </div>
 
-<div class="input-field-wrapper">
-    <label for="description">Description</label>
-    <textarea id="description" class="form-field" rows="5" formControlName="description"></textarea>
-</div>
+    <div class="w-full">
+        <button class="btn float-right" type="submit">Submit</button>
+    </div>
 
-<div class="w-full">
-    <button class="btn float-right" type="submit">Submit</button>
-</div>
+</form>

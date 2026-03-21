@@ -1,0 +1,36 @@
+<h2 class="sm:text-2xl text-xl font-extrabold mb-5">Apply Leave</h2>
+
+<form class="card" [formGroup]="leaveForm" (ngSubmit)="onSubmit()">
+
+  <div class="input-field-wrapper">
+    <label for="" class="form-label">Leave Type</label>
+    <select class="form-field" formControlName="leaveType">
+      <option value="">Select</option>
+      <option value="SL/CL">Sick / Casual Leave</option>
+      <option value="PL">Privilege Leave</option>
+      <option value="CL">Compensatory Leave</option>
+    </select>
+  </div>
+
+  <div class="grid sm:grid-cols-2 gap-3">
+    <div class="input-field-wrapper">
+      <label for="" class="form-label">From</label>
+      <input type="date" class="form-field" formControlName="from" (change)="handleFromChange($event.target.value)">
+    </div>
+
+    <div class="input-field-wrapper">
+      <label for="" class="form-label">To</label>
+      <input type="date" class="form-field" formControlName="to" [min]="leaveEndMinDate">
+    </div>
+  </div>
+
+  <div class="input-field-wrapper">
+    <label for="" class="form-label">Reason</label>
+    <textarea class="form-field" formControlName="reason"></textarea>
+  </div>
+
+  <div class="flex justify-end">
+    <button class="btn">Submit</button>
+  </div>
+
+</form>

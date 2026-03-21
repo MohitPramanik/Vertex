@@ -1,0 +1,9 @@
+<section 
+	class="w-full"
+	app-table 
+	[tableLabel]="'Leave requests'" 
+	[tableHeaders]="['ID', 'Employee', 'Type', 'From', 'To', 'Days', 'Status', 'Actions']" 
+	[tableData]="leaveRequestData"
+	[tableDataSequence]="['id', 'employee.name', 'employee.id', 'type', 'startDate', 'endDate', 'days', 'status']"
+    [pagination]="true"
+></section>

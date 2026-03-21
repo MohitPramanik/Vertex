@@ -1,7 +1,4 @@
-<div class="flex justify-between items-center mb-5">
-    <h2 class="sm:text-2xl text-xl font-extrabold">Attendance calendar</h2>
-    <a routerLink="/attendance/records" class="btn">View analytics</a>
-</div>
+<h2 class="sm:text-2xl text-xl font-extrabold mb-5">Attendance calendar</h2>
 
 <div class="calendar-box">
     <div class="calendar-header flex w-full bg-blue-400 text-white font-bold sm:text-xl text-base">
@@ -17,7 +14,6 @@
                     <button
                         (click)="handleCellClick(blockIndex, calendarDate)"
                         [class.disabled-box]="isDisabled(blockIndex, calendarDate)" 
-                        [class.logged]="hasEntry(calendarDate)"
                         class="calendar-cell"
                     >
                         {{calendarDate}}
@@ -34,7 +30,7 @@
         [(isShown)]="isTimeSheetModelOpen"
         [modalTitle]="'Timesheet'"
     >
-       <form attendance-modal-form></form>
+       <div attendance-modal-form (isSubmitted)="handleCloseBtnClick()"></div>
     </div>
 }
 

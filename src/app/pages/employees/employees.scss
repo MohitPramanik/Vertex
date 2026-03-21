@@ -3,3 +3,7 @@
 .search-box {
     @apply border-2 border-black px-4 py-2 rounded-full bg-white;
 }
+
+.input-field-wrapper {
+    @apply flex-1 min-w-[150px] mb-1;
+}

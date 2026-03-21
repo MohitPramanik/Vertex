@@ -2,6 +2,7 @@ import { Component, computed, inject, input, Signal, signal } from '@angular/cor
 import { Table } from '../../components/table/table';
 import { UserRole } from '../../interfaces/user';
 import { AuthService } from '../../services/auth/auth-service';
+import { Router } from '@angular/router';
 
 interface DashBoardCard {
   title: string;
@@ -19,18 +20,8 @@ interface Holidays {
 @Component({
   selector: 'div.app-dashboard-card',
   imports: [],
-  template: `
-    <h1 class="sm:text-xl text-lg">{{title()}}</h1>
-    @if(subTitle()) {
-      <p class="sm:text-lg text-base mt-2">{{subTitle()}}</p>
-    }
-    <p class="sm:text-4xl text-3xl font-extrabold mt-2">
-      <ng-content>0</ng-content>
-    </p>
-  `,
+  templateUrl: "./dashboard-card.html",
   styleUrl: './dashboard.scss',
-  host: {
-  }
 })
 
 export class DashboardCard {
@@ -47,6 +38,7 @@ export class DashboardCard {
 export class Dashboard {
 
   private auth = inject(AuthService);
+  private router = inject(Router);
 
   role = signal<UserRole>("employee");
   cardDataSelection = signal<CardDataSelection>("self"); // Only Managers, HRs and Admin can udpate
@@ -164,4 +156,8 @@ export class Dashboard {
     { role: "UI/UX Designer", applicants: "15", interviewing: "3", selected: "1" },
     { role: "QA Engineer", applicants: "18", interviewing: "5", selected: "0" }
   ];
+
+  navigateToUrl(url: string) {
+    this.router.navigateByUrl(url);
+  }
 }

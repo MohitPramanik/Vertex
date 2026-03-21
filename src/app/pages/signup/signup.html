@@ -6,30 +6,30 @@
       Create Account
     </h2>
 
-    <form class="space-y-4">
+    <form class="space-y-4" [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
 
       <div class="input-field-wrapper">
         <label for="username" class="form-label">Full Name</label>
-        <input type="text" placeholder="Enter your name" id="username" class="form-field" autocomplete="off">
+        <input type="text" placeholder="Enter your name" id="username" formControlName="username" class="form-field" autocomplete="off">
       </div>
 
       <div class="input-field-wrapper">
         <label for="email" class="form-label">Email</label>
-        <input type="email" placeholder="Enter your email" id="email" class="form-field" autocomplete="off">
+        <input type="email" placeholder="Enter your email" id="email" formControlName="email" class="form-field" autocomplete="on">
       </div>
 
       <div class="input-field-wrapper">
         <label for="password" class="form-label">Password</label>
-        <input type="password" placeholder="Create password" id="password" class="form-field" autocomplete="off">
+        <input type="password" placeholder="Create password" id="password" formControlName="password" class="form-field" autocomplete="off">
       </div>
 
       <div class="input-field-wrapper">
         <label for="confirm-password" class="form-label">Confirm Password</label>
-        <input type="password" placeholder="Confirm password" id="confirm-password" class="form-field" autocomplete="off">
+        <input type="password" placeholder="Confirm password" id="confirm-password" formControlName="confirmPassword" class="form-field" autocomplete="off">
       </div>
 
       <div class="flex items-center gap-2 text-sm">
-        <input type="checkbox" class="h-4 w-4" autocomplete="off">
+        <input type="checkbox" class="h-4 w-4" formControlName="isAgree" autocomplete="off">
         <span>I agree to the Terms & Conditions</span>
       </div>
 

@@ -1,4 +1,4 @@
-import { Component, input, output } from '@angular/core';
+import { Component, input, OnInit, output } from '@angular/core';
 
 type TableCellData = string | [string, string];
 
@@ -35,10 +35,20 @@ export class Table {
   // Accepts string array or if want to add class pass [textToDisplay, class] for the element for which it's needed
   tableDataSequence = input<TableCellData[]>([]); // if want increasing sequence in column, pass '#' in data
   tableButtonLabel = input<string>();
-  tableButtonAction = input<() => void>();
+  tableButtonActionClicked = output<void>();
   emptyTableMessage = input<string>("No Records Found");
+  pagination = input<boolean>(false);
 
   isTuple(header: TableCellData): header is [string, string] {
     return Array.isArray(header);
+  }
+
+  
+  resolveObject(item: string, data: {[key: string]: any}) {
+    let keys = item.split(".");
+
+    const result = keys.reduce((acc, key) => acc?.[key], data)
+    return result;
+
   }
 }
