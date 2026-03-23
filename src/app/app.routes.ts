@@ -30,9 +30,9 @@ export const routes: Routes = [
                 data: { role: ["admin", "manager", "hr", "employee", "superAdmin"] }
             },
             {
-                path: "attendance",
-                loadComponent: () => import("./pages/attendance/attendance").then(m => m.Attendance),
-                title: "Vertex - Attendance",
+                path: "timesheet",
+                loadComponent: () => import("./pages/timesheet/timesheet-calendar/timesheet-calendar").then(m => m.TimesheetCalendar),
+                title: "Vertex - Timesheet",
                 canDeactivate: [unsavedChangesGuard],
                 data: { role: ["admin", "manager", "hr", "employee", "superAdmin"] },
                 children: [
@@ -122,12 +122,12 @@ export const routes: Routes = [
                 children: [
                     {
                         path: "jobs",
-                        loadComponent: () => import("./pages/jobs/jobs").then(m => m.Jobs),
+                        loadComponent: () => import("./pages/recruitment/jobs/jobs").then(m => m.Jobs),
                         title: "Vertex - Jobs List"
                     },
                     {
                         path: "candidates",
-                        loadComponent: () => import("./pages/candidates/candidates").then(m => m.Candidates),
+                        loadComponent: () => import("./pages/recruitment/candidates/candidates").then(m => m.Candidates),
                         title: "Vertex - Candidates List"
                     }
                 ]

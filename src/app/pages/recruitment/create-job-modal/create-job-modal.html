@@ -1,0 +1,112 @@
+<form class="w-full" [formGroup]="jobForm" (ngSubmit)="onSubmit()">
+    <div class="input-field-wrapper">
+        <label class="form-label">Job Title</label>
+        <input type="text" class="form-field" placeholder="Enter job title" formControlName="title" />
+
+        @if(showError('title', 'required')) {
+            <p class="form-error-msg">This field is required</p>
+        }
+    </div>
+
+    <div class="input-field-wrapper">
+        <label class="form-label">Department</label>
+        <select class="form-field" formControlName="department">
+            <option value="">Select Department</option>
+            <option>Hiring</option>
+            <option>Engineering</option>
+        </select>
+
+        @if(showError('department', 'required')) {
+            <p class="form-error-msg">This field is required</p>
+        }
+    </div>
+
+    <div class="input-field-wrapper">
+        <label class="form-label">Location</label>
+        <input type="text" class="form-field" placeholder="e.g. Bangalore" formControlName="location" />
+    </div>
+
+    <div class="grid sm:grid-cols-2 gap-4">   
+        <div class="input-field-wrapper">
+            <label class="form-label">Employment Type</label>
+            <select class="form-field" formControlName="employmentType">
+                <option value="">Select type</option>
+                <option>Full-time</option>
+                <option>Part-time</option>
+                <option>Internship</option>
+                <option>Contract</option>
+            </select>
+
+            @if(showError('employmentType', 'required')) {
+                <p class="form-error-msg">This field is required</p>
+            }
+        </div>
+
+        <div class="input-field-wrapper">
+            <label class="form-label">Minimum Required Experience</label>
+            <input type="number" class="form-field" min="0" value="0" formControlName="minExperienceRequired"  />
+
+            @if(showError('minExperienceRequired', 'min')) {
+                <p class="form-error-msg">Value can't be negative</p>
+            }
+        </div>
+     </div>
+
+    <div class="grid grid-cols-2 gap-4">
+        <div class="input-field-wrapper">
+            <label class="form-label">Min Salary</label>
+            <input type="number" class="form-field" min="0" formControlName="minSalary" />
+
+            @if(showError('minSalary', 'min')) {
+                <p class="form-error-msg">Value can't be negative</p>
+            }
+        </div>
+
+        <div class="input-field-wrapper">
+            <label class="form-label">Max Salary</label>
+            <input type="number" class="form-field" min="0" formControlName="maxSalary" />
+
+            @if(showError('maxSalary', 'min')) {
+                <p class="form-error-msg">Value can't be negative</p>
+            }
+        </div>
+    </div>
+
+    <div class="input-field-wrapper">
+        <label class="form-label">Required Skills</label>
+        <input type="text" class="form-field" placeholder="e.g. Angular, Node.js, MongoDB" formControlName="requiredSkills" />
+
+        @if(showError('requiredSkills', 'required')) {
+            <p class="form-error-msg">This field is required</p>
+        }
+    </div>
+
+    <div class="input-field-wrapper">
+        <label class="form-label">Job Description</label>
+        <textarea rows="4" class="form-field" placeholder="Enter job details..." formControlName="description"></textarea>
+
+         @if(showError('description', 'required')) {
+            <p class="form-error-msg">This field is required</p>
+        }
+    </div>
+
+    <div class="input-field-wrapper">
+        <label class="form-label">Status</label>
+        <select class="form-field" formControlName="status">
+            <option value="open">Open</option>
+            <option value="closed">Closed</option>
+            <option value="onHold">Hold</option>
+        </select>
+    </div>
+
+    <div class="flex justify-end gap-3">
+        <button type="button" class="btn-outline" (click)="onClose()">
+            Cancel
+        </button>
+
+        <button type="submit" class="btn">
+            Save Job
+        </button>
+    </div>
+
+</form>

@@ -47,7 +47,7 @@ export class Sidebar implements OnInit {
   SIDEBAR_KEYS = {
     DASHBOARD: "Dashboard",
     EMPLOYEES: "Employees",
-    ATTENDANCE: "Attendance",
+    ATTENDANCE: "Timesheet",
     LEAVE: "Leave Ledger",
     PAYROLL: "Payroll",
     RECRUITMENT: "Recruitment",
@@ -96,8 +96,8 @@ export class Sidebar implements OnInit {
       title: this.SIDEBAR_KEYS.ATTENDANCE,
       icon: "fa-address-book",
       children: [
-        { title: "Log", path: "/attendance" },
-        { title: "Analytics", path: "/attendance/records" }
+        { title: "Log", path: "/timesheet" },
+        { title: "Analytics", path: "/timesheet/records" }
       ],
     },
     {

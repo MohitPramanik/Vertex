@@ -1,18 +1,11 @@
 import { Component, signal } from '@angular/core';
 import { Table } from '../../components/table/table';
 import { Modal } from '../../components/modal/modal';
-
-@Component({
-  selector: 'div[create-department-modal]',
-  imports: [],
-  templateUrl: './create-department-modal.html',
-})
-
-export class CreateDepartmentModel{}
+import { CreateDepartmentModal } from './create-department-modal/create-department-modal';
 
 @Component({
   selector: 'app-departments',
-  imports: [Table, Modal, CreateDepartmentModel],
+  imports: [Table, Modal, CreateDepartmentModal],
   templateUrl: './departments.html',
   styleUrl: './departments.scss',
 })
@@ -56,5 +49,9 @@ export class Departments {
 
   openCreateDepartmentModal() {
     this.isCreateDepartmentModalOpen.set(true);
+  }
+
+  closeCreateDepartmentModal() {
+    this.isCreateDepartmentModalOpen.set(false);
   }
 }

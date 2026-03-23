@@ -14,10 +14,10 @@
 
         @if(email?.invalid && (email?.dirty || email?.touched)) {
           @if(email?.hasError('required')) {
-            <p class="text-red-500 text-xs">This field is required</p>
+            <p class="form-error-msg">This field is required</p>
           }
-          @else if(email?.hasError('email')) {
-            <p class="text-red-500 text-xs">Please enter a valid email</p>
+          @else if(email?.hasError('email') || email?.hasError('pattern')) {
+            <p class="form-error-msg">Please enter a valid email</p>
           }
         } 
       </div>
@@ -29,10 +29,10 @@
           
           @if(password?.invalid && (password?.dirty || password?.touched)) {
             @if(password?.hasError('required')) {
-              <p class="text-red-500 text-xs">This field is required</p>
+              <p class="form-error-msg">This field is required</p>
             }
             @else if(password?.hasError('minlength')) {
-              <p class="text-red-500 text-xs">Password must be at least 6 characters</p>
+              <p class="form-error-msg">Password must be at least 6 characters</p>
             }
           }
       </div>

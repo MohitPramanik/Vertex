@@ -1,9 +1,13 @@
 <form [formGroup]="timeSheet" (ngSubmit)="onSubmit()">
 
-    <div class="sm:flex w-full gap-2 items-center h-max">
+    <div class="sm:flex w-full gap-2 items-start h-max">
         <div class="input-field-wrapper sm:w-1/2!">
             <label for="date">Date</label>
-            <input type="date" id="date" class="form-field" [min]="minDate" formControlName="date">
+            <input type="date" id="date" class="form-field" [min]="minDate" formControlName="date" required>
+
+            @if(showError('date', 'required')) {
+                <p class="form-error-msg">This field is required</p>
+            }
         </div>
 
         <div class="input-field-wrapper sm:w-1/2! inline-block">
@@ -14,6 +18,10 @@
                 <option [value]="i+1">{{i + 1}} Hours</option>
                 }
             </select>
+
+             @if(showError('workHours', 'min')) {
+                <p class="form-error-msg">This field is required</p>
+            }
         </div>
     </div>
 
@@ -25,6 +33,10 @@
             <option value="{{item}}">{{item}}</option>
             }
         </select>
+
+         @if(showError('project', 'required')) {
+                <p class="form-error-msg">This field is required</p>
+            }
     </div>
 
     <div class="input-field-wrapper">

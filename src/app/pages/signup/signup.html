@@ -14,10 +14,10 @@
           autocomplete="off">
 
         @if(showError('username', 'required')) {
-          <p class="text-red-500 text-xs">This field is required</p>
+          <p class="form-error-msg">This field is required</p>
         }
         @else if(showError('username', 'minlength')) {
-          <p class="text-red-500 text-xs">Name must be at least 3 characters</p>
+          <p class="form-error-msg">Name must be at least 3 characters</p>
         }
       </div>
 
@@ -27,10 +27,10 @@
           autocomplete="on">
 
         @if(showError('email', 'required')) {
-          <p class="text-red-500 text-xs">This field is required</p>
+          <p class="form-error-msg">This field is required</p>
         }
-        @else if(showError('email', 'email')) {
-          <p class="text-red-500 text-xs">Please enter a valid email</p>
+        @else if(showError('email', 'email') || showError('email', 'pattern')) {
+          <p class="form-error-msg">Please enter a valid email</p>
         }
       </div>
 
@@ -40,10 +40,10 @@
           autocomplete="off">
 
         @if(showError('password', 'required')) {
-          <p class="text-red-500 text-xs">This field is required</p>
+          <p class="form-error-msg">This field is required</p>
         }
         @else if(showError('password', 'minlength')) {
-          <p class="text-red-500 text-xs">Password must be at least 6 characters</p>
+          <p class="form-error-msg">Password must be at least 6 characters</p>
         }
       </div>
 
@@ -52,10 +52,10 @@
         <input type="password" placeholder="Confirm password" id="confirm-password" formControlName="confirmPassword"
           class="form-field" autocomplete="off">
         @if(showError('confirmPassword', 'required')) {
-          <p class="text-red-500 text-xs">This field is required</p>
+          <p class="form-error-msg">This field is required</p>
         }
         @else if(signUpForm.errors?.['passwordMismatch'] && signUpForm.get('confirmPassword')?.touched) {
-          <p class="text-red-500 text-xs">Passwords do not match</p>
+          <p class="form-error-msg">Passwords do not match</p>
         }
       </div>
 

@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { AbstractControl, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Component, inject } from '@angular/core';
+import { AbstractControl, FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 
 @Component({
@@ -9,27 +9,30 @@ import { RouterLink } from '@angular/router';
   styleUrl: './signup.scss',
 })
 export class Signup {
-  signUpForm = new FormGroup({
-    username: new FormControl("", [
+
+  private formBuilder = inject(FormBuilder);
+
+  signUpForm = this.formBuilder.group({
+    username: ["", [
       Validators.required,
       Validators.minLength(3)
-    ]),
-    email: new FormControl("", [
+    ]],
+    email: ["", [
       Validators.required,
-      Validators.email
-    ]),
-    password: new FormControl("", [
+      Validators.email,
+      Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')
+    ]],
+    password: ["", [
       Validators.required,
       Validators.minLength(6)
-    ]),
-    confirmPassword: new FormControl("", [
+    ]],
+    confirmPassword: ["", [
       Validators.required,
       Validators.minLength(6),
-    ]),
-    isAgree: new FormControl(false, [
-      Validators.requiredTrue
-    ])
-  }, { validators: this.passwordMatchValidator })
+    ]],
+    isAgree: [false, [Validators.requiredTrue]]
+  },
+    { validators: this.passwordMatchValidator })
 
   showError(controlName: string, errorName: string) {
     const control = this.signUpForm.get(controlName);

@@ -5,7 +5,7 @@
     (headerButtonActionClicked)="openCreateJobModal()"
     [tableHeaders]="['Title', 'Department', 'Location', 'Status', 'Candidates', 'Actions']"
     [tableData]="jobs"
-    [tableDataSequence]="['title', 'department', 'location','status', 'candidateCount']"
+    [tableDataSequence]="['title', 'department', 'location','status', 'candidateCount', '']"
 >
 </section>
 
@@ -15,6 +15,6 @@
         [modalTitle]="'Create Job'"
         [(isShown)]="isCreateJobModalOpen"
     >
-        <div create-job-modal class="w-full"></div>
+        <div app-create-job-modal (emitClose)="closeCreateJobModal()" class="w-full"></div>
     </div>
 }

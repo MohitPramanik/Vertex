@@ -1,14 +1,8 @@
-import { Component, signal } from '@angular/core';
-import { Table } from '../../components/table/table';
-import { Modal } from '../../components/modal/modal';
-
-@Component({
-  selector: 'div[create-job-modal]',
-  imports: [],
-  templateUrl: './create-job-modal.html'
-})
-
-export class CreateJobModal{};
+import { Component, inject, signal } from '@angular/core';
+import { Table } from '../../../components/table/table';
+import { Modal } from '../../../components/modal/modal';
+import { CreateJobModal } from '../create-job-modal/create-job-modal';
+import { FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-jobs',
@@ -16,14 +10,20 @@ export class CreateJobModal{};
   templateUrl: './jobs.html',
   styleUrl: './jobs.scss',
 })
+
 export class Jobs {
+
   isCreateJobModalOpen = signal<boolean>(false);
 
   openCreateJobModal() {
     this.isCreateJobModalOpen.set(true);
   }
 
-  jobs=[
+  closeCreateJobModal() {
+    this.isCreateJobModalOpen.set(false);
+  }
+
+  jobs = [
     {
       "id": 1,
       "title": "Frontend Developer",

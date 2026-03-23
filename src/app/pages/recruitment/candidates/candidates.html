@@ -1,0 +1,38 @@
+<section app-table [tableLabel]="'Candidates'" [headerButtonLabel]="'Add'"
+    (headerButtonActionClicked)="openCreateCandidateModal()"
+    [tableHeaders]="['Name', 'Email', 'Job', 'Experience', 'Status', 'Actions']" [tableData]="candidates"
+    [tableDataSequence]="['name', 'email', 'jobTitle','experience', '', '']">
+    <!-- Filters -->
+    <div th-content-area class="filter-section">
+        <form class="w-full">
+            <div class="grid! sm:grid-cols-3 gap-x-3! input-field-wrapper">
+                <input type="text" placeholder="Search..." class="form-field" />
+
+                <select class="form-field">
+                    <option>All Jobs</option>
+                </select>
+
+                <select class="form-field">
+                    <option>All Status</option>
+                    <option>Applied</option>
+                    <option>Interview</option>
+                    <option>Selected</option>
+                    <option>Rejected</option>
+                </select>
+            </div>
+
+            <div class="flex justify-between">
+                <button class="btn">Clear</button>
+                <button class="btn">Submit</button>
+            </div>
+
+        </form>
+    </div>
+
+</section>
+
+@if(isCreateCandidateModalOpen()) {
+<div app-modal [modalTitle]="'Create Candidate'" [(isShown)]="isCreateCandidateModalOpen">
+    <div app-create-candidate-modal class="w-full"></div>
+</div>
+}

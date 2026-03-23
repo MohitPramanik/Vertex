@@ -1,13 +1,7 @@
 import { Component, signal } from '@angular/core';
-import { Table } from '../../components/table/table';
-import { Modal } from '../../components/modal/modal';
-
-@Component({
-  selector: 'div[create-candidate-modal]',
-  templateUrl: './create-candidate-modal.html',
-})
-
-export class CreateCandidateModal {}
+import { Table } from '../../../components/table/table';
+import { Modal } from '../../../components/modal/modal';
+import { CreateCandidateModal } from '../create-candidate-modal/create-candidate-modal';
 
 @Component({
   selector: 'app-candidates',

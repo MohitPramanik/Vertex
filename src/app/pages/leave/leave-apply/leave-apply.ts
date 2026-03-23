@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { ReactiveFormsModule, FormBuilder } from '@angular/forms';
+import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'section[leave-apply]',
@@ -12,10 +12,10 @@ export class LeaveApply {
 
   leaveForm = this.formBuilder.group({
     empId: [''],
-    leaveType: [''],
-    from: [''],
-    to: [''],
-    reason: ['']
+    leaveType: ['', [Validators.required]],
+    from: ['', [Validators.required]],
+    to: ['', [Validators.required]],
+    reason: ['', [Validators.required, Validators.minLength(10)]]
   })
 
   leaveEndMinDate = "";
@@ -28,7 +28,13 @@ export class LeaveApply {
         to: ""
       })
     }
-    
+
+  }
+
+  showError(controlName: string, errorName: string) {
+    const control = this.leaveForm.get(controlName);
+
+    return control?.invalid && (control.dirty || control.touched) && control.hasError(errorName);
   }
 
   onSubmit() {

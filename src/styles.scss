@@ -119,3 +119,7 @@ a.btn-outline {
     border-radius: 10px;
     border: 1px solid #00000052;
 }
+
+.form-error-msg {
+    @apply text-red-500 text-xs;
+}
