@@ -97,7 +97,7 @@
 		 [headerButtonLabel]="'Apply'"
 		 (headerButtonActionClicked)="navigateToUrl('/leave/apply')"
 		 [tableHeaders]="['Leave Type', 'Date', 'Status']" 
-		 [tableData]="leaveData"
+		 [tableData]="leaveRequests()"
 		 [tableDataSequence]="['leaveType', 'date', 'status']"
 		 [tableButtonLabel]="'SEE MORE'"
 		 (tableButtonActionClicked)="navigateToUrl('/leave/requests')"

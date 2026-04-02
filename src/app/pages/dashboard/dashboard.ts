@@ -4,37 +4,10 @@ import { UserRole } from '../../interfaces/user';
 import { AuthService } from '../../services/auth/auth-service';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { ApiResponse } from '../../interfaces/api';
+import { DashboardCard } from './dashboard-card';
+import { CardDataSelection, DashboardCardApiResponse, Holiday, IDashBoardCard } from '../../interfaces/dashboard';
 
-interface DashBoardCard {
-  title: string;
-  data: string;
-  subTitle?: string;
-}
-
-type CardDataSelection = "self" | "team";
-
-interface Holiday {
-  name: string;
-  date: string;
-  day: string;
-}
-
-interface ApiResponse {
-  status: number;
-  data: Holiday[];
-}
-
-@Component({
-  selector: 'div.app-dashboard-card',
-  imports: [],
-  templateUrl: "./dashboard-card.html",
-  styleUrl: './dashboard.scss',
-})
-
-export class DashboardCard {
-  title = input<string>("Card Title");
-  subTitle = input<string>('');
-}
 
 @Component({
   selector: 'div.app-dashboard',
@@ -42,6 +15,7 @@ export class DashboardCard {
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.scss',
 })
+
 export class Dashboard implements OnInit {
 
   private auth = inject(AuthService);
@@ -49,99 +23,42 @@ export class Dashboard implements OnInit {
   private http = inject(HttpClient);
 
   holidays = signal<Holiday[]>([]);
-
+  leaveRequests = signal([]);
   role = signal<UserRole>("employee");
-  cardDataSelection = signal<CardDataSelection>("self"); // Only Managers, HRs and Admin can udpate
+  cardDataSelection = signal<CardDataSelection>("self"); // role="employee" can't access this
+  selfCardData = signal<IDashBoardCard[]>([]);
+  organizationCardData = signal<IDashBoardCard[]>([]);
 
+  fetchDashboardCardData() {
+    this.http.post<DashboardCardApiResponse>("http://localhost:8000/api/dashboard", {
+      empId: this.auth.currentUser?.id,
+      role: this.auth.currentUser?.role
+    })
+      .subscribe(res => {
+        this.selfCardData.set(res.data.self);
+        this.organizationCardData.set(res.data.organization);
+      })
+  }
+
+  fetchHolidayList() {
+    this.http.get<ApiResponse>("http://localhost:8000/api/holiday/upcoming")
+      .subscribe(res => this.holidays.set(res.data));
+  }
 
   ngOnInit() {
     this.role.set(this.auth.getCurrentUser()?.role ?? "employee")
-
-    this.http.get<ApiResponse>("http://localhost:8000/api/holiday/upcoming")
-      .subscribe(res => {
-        if (res.data) {
-          this.holidays.set(res.data);
-        }
-      });
+    this.fetchDashboardCardData();
+    this.fetchHolidayList();
   }
 
-  // for each employee including managers, hrs, ... as well
-  employeeCardData: DashBoardCard[] = [
-    { title: "Leave Balance", data: "42" },
-    { title: "Pending Requests", data: "01" },
-    { title: "Present Days", subTitle: "(This Month)", data: "10 / 22" },
-    { title: "Leaves Taken", subTitle: "(This Year)", data: "04" },
-  ]
-
-  // for managers (organization card data - only his team)
-  teamCardData: DashBoardCard[] = [
-    { title: "Team size", data: "12" },
-    { title: "Employees Present Today", data: "10" },
-    { title: "Team Leave Request Pending", data: "02" },
-    { title: "Upcoming Events", data: "01" },
-  ]
-
-  // for hrs (organization card data)
-  hrCardData: DashBoardCard[] = [
-    { title: "Total Employees", data: "124" },
-    { title: "Open Job Positions", data: "05" },
-    { title: "Candidates in Pipeline", data: "25" },
-    { title: "Resignation Requests", data: "03" }
-  ]
-
-  // Leave data
-  leaveData = [
-    { leaveType: 'Sick Leave', date: '10 March 2026', status: 'Approved' },
-    { leaveType: 'Casual Leave', date: '18 March 2026', status: 'Pending' },
-    { leaveType: 'Annual Leave', date: '25 March 2026', status: 'Rejected' },
-    { leaveType: 'Work From Home', date: '02 April 2026', status: 'Approved' }
-  ];
-
-  // for admin (organization card data)
-  adminCardData: DashBoardCard[] = [
-    { title: "Total Employees", data: "124" },
-    { title: "Active Users", data: "118" },
-    { title: "Departments", data: "08" },
-    { title: "Open Job Positions", data: "05" }
-  ];
-
-  // for superadmin
-  superAdminCardData = [
-    { title: "Total Employees", data: "124" },
-    { title: "Active Users", data: "118" },
-    { title: "Departments", data: "08" },
-    { title: "Open Job Positions", data: "05" }
-  ];
-
-  // Card data which changes according to role
-  cardData: Signal<DashBoardCard[]> = computed(() => {
-    if (
-      (this.role() === "employee") ||
-      (this.role() === "manager" && this.cardDataSelection() === "self") ||
-      (this.role() === "hr" && this.cardDataSelection() === "self") ||
-      (this.role() === "admin" && this.cardDataSelection() === "self")
-    ) {
-      return this.employeeCardData;
+  cardData: Signal<IDashBoardCard[]> = computed(() => {
+    if (this.cardDataSelection() === "self") {
+      return this.selfCardData();
     }
-
-    else if (this.role() === "manager" && this.cardDataSelection() === "team") {
-      return this.teamCardData;
-    }
-
-    else if (this.role() === "hr" && this.cardDataSelection() === "team") {
-      return this.hrCardData;
-    }
-
-    else if (this.role() === "admin" && this.cardDataSelection() === "team") {
-      return this.adminCardData;
-    }
-
     else {
-      return this.superAdminCardData;
+      return this.organizationCardData();
     }
-
   });
-
 
 
   // Last 4 system activity (for super admin);

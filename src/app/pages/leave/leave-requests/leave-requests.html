@@ -5,7 +5,7 @@
 		[tableLabel]="'Leave requests'" 
 		[tableHeaders]="['Type', 'From', 'To', 'Applied Date', 'Status', 'Actions']" 
 		[tableData]="leaveRequests()"
-		[tableDataSequence]="['leaveType', 'from', 'to', 'createdAt', 'status', '']"
+		[tableDataSequence]="['leaveType', 'from', 'to', 'createdAt', ['status', 'capitalize'], '']"
 		[pagination]="true"
 	></section>
 }

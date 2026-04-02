@@ -9,6 +9,8 @@ import { Component, computed, HostBinding, input, model } from '@angular/core';
 export class Modal {
   isShown = model<boolean>(false);
   modalTitle = input<string>();
+  closeBtn = input<boolean>(true);
+  isConfirmationModal = input<boolean>(false);
 
   close() {
     this.isShown.set(false);

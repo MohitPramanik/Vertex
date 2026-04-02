@@ -1,18 +1,22 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from '../../../services/auth/auth-service';
+import { Modal } from '../../../components/modal/modal';
 
 @Component({
   selector: 'section[leave-apply]',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, Modal],
   templateUrl: './leave-apply.html',
   styleUrl: './leave-apply.scss',
 })
 export class LeaveApply {
   private formBuilder = inject(FormBuilder);
+  loading = signal<boolean>(false);
+  error = signal<boolean>(false);
+  isModalOpen = signal<boolean>(false);
 
-  constructor(private http: HttpClient, private auth: AuthService) {}
+  constructor(private http: HttpClient, private auth: AuthService) { }
 
   leaveForm = this.formBuilder.group({
     leaveType: ['', [Validators.required]],
@@ -41,17 +45,25 @@ export class LeaveApply {
   }
 
   onSubmit() {
-
-    console.log(this.auth.currentUser?.id)
-    console.log(this.auth.currentUser?.managerId)
+    this.loading.set(true);
 
     this.http.post("http://localhost:8000/api/leave/apply", {
-        empId: this.auth.currentUser?.id,
-        managerId: this.auth.currentUser?.managerId,
-        ...this.leaveForm.value
-    }).subscribe(res => {
-      console.log(res);
-
+      empId: this.auth.currentUser?.id,
+      managerId: this.auth.currentUser?.managerId,
+      ...this.leaveForm.value
     })
+      .subscribe({
+        next: (res) => {
+          this.loading.set(false);
+          this.error.set(false);
+          this.leaveForm.reset();
+          this.isModalOpen.set(true);
+        },
+        error: (err) => {
+          this.loading.set(false);
+          this.error.set(true);
+          this.isModalOpen.set(true);
+        }
+      })
   }
 }

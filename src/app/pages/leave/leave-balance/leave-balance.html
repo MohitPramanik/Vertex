@@ -2,32 +2,7 @@
 		class="w-full"
 		app-table 
 		[tableLabel]="'Ledger entries'" 
-		[tableHeaders]="['Date', 'Employee', 'Type', 'Description', 'Change', 'Balance after']" 
-		[tableData]="leaveBalanceData"
-		[tableDataSequence]="['entryDate', 'employee.name', 'employee.id', 'type', 'description', 'deltaDays']"
-    [pagination]="true"
->
-    <div class="balance-grid mb-4" th-content-area>
-      <div class="balance-card">
-        <div class="balance-title">Annual</div>
-        <div class="balance-value">12</div>
-        <div class="balance-sub">days remaining</div>
-      </div>
-      <div class="balance-card">
-        <div class="balance-title">Sick</div>
-        <div class="balance-value">8</div>
-        <div class="balance-sub">days remaining</div>
-      </div>
-      <div class="balance-card">
-        <div class="balance-title">Casual</div>
-        <div class="balance-value">6</div>
-        <div class="balance-sub">days remaining</div>
-      </div>
-      <div class="balance-card unpaid">
-        <div class="balance-title">Unpaid</div>
-        <div class="balance-value">∞</div>
-        <div class="balance-sub">no balance deduction</div>
-      </div>
-    </div>
-
-</section>
+		[tableHeaders]="['Leave Type', 'Balance']" 
+		[tableData]="leaveBalanceData()"
+		[tableDataSequence]="['leaveType', 'balance']"
+></section>

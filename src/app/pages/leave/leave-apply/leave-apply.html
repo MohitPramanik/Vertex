@@ -52,7 +52,30 @@
   </div>
 
   <div class="flex justify-end">
-    <button [disabled]="leaveForm.invalid" class="btn">Submit</button>
+    <button [disabled]="leaveForm.invalid || loading()" class="btn">{{loading() ? "Submitting..." : "Submit"}}</button>
   </div>
 
 </form>
+
+
+@if(isModalOpen()) {
+    <div
+        app-modal
+        [(isShown)]="isModalOpen"
+        [closeBtn]="false"
+        [isConfirmationModal]="true"
+    >
+        <div class="flex justify-center items-center flex-col gap-5 w-full">
+
+          @if(error()) {
+            <p class="text-red-500 font-extrabold text-5xl">OOPS!!</p>
+            <p class="text-lg">Something went wrong</p>
+          } @else {
+            <img src="/green_tick.png" alt="success" loading="lazy" class="h-[5rem]">
+            <p class="text-lg">Leave applied successfully</p>
+          }
+          
+          <button class="btn" (click)="isModalOpen.set(false)">Ok</button>
+        </div>
+    </div>
+}

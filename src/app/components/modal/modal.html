@@ -1,12 +1,14 @@
-<div class="modal-box" animate.enter="appear">
+<div class="modal-box" animate.enter="appear" [class]="isConfirmationModal() ? 'max-w-[34rem]': null">
 
     <div class="w-full mb-2">
         @if(modalTitle()) {
             <h2 class="font-bold text-xl float-left">{{modalTitle()}}</h2>
         }
-        <button type="button" class="float-right text-lg cursor-pointer" (click)="close()">
-            <i class="fa-solid fa-xmark"></i>
-        </button>
+        @if(closeBtn()) {
+            <button type="button" class="float-right text-lg cursor-pointer" (click)="close()">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        }
     </div>
 
     <ng-content></ng-content>
