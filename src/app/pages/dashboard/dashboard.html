@@ -1,19 +1,37 @@
 <!-- Toggle buttons for all except employee -->
 @if(role() === "manager" || role() === "hr" || role() === "admin") {
-<div class="flex justify-center items-center flex-wrap gap-5 w-full mb-4">
-	<button class="btn tab-btn" [class.active]="cardDataSelection() === 'self'" (click)="cardDataSelection.set('self')">Personal</button>
-	<button class="btn tab-btn" [class.active]="cardDataSelection() === 'team'" (click)="cardDataSelection.set('team')">Organization</button>
-</div>
+	<div class="flex justify-center items-center flex-wrap gap-5 w-full mb-4">
+		<button 
+			class="btn tab-btn" 
+			[class.active]="cardDataSelection() === 'self'" 
+			(click)="cardDataSelection.set('self')"
+		>
+			Personal
+		</button>
+		<button 
+			class="btn tab-btn" 
+			[class.active]="cardDataSelection() === 'team'" 
+			(click)="cardDataSelection.set('team')"
+		>
+			Organization
+		</button>
+	</div>
 }
+
 
 <!-- Dashboard Cards -->
 <section class="grid sm:grid-cols-2 gap-3 w-full">
 	@for(card of cardData(); track card.title) {
-		<div class="app-dashboard-card" [title]="card.title" [subTitle]="card.subTitle ?? ''">
+		<div 
+			class="app-dashboard-card" 
+			[title]="card.title" 
+			[subTitle]="card.subTitle ?? ''"
+		>
 			{{card.data}}
 		</div>
 	}
 </section>
+
 
 <!-- Quick buttons -->
 <div class="flex justify-center items-center flex-wrap gap-5 w-full mt-8">

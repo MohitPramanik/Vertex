@@ -80,6 +80,11 @@ export class AuthService {
     return this.currentUser;
   } 
 
+  getCurrentRole(): UserRole | null {
+    const user = this.getCurrentUser();
+    return user ? user.role : null;
+  }
+
   isAuthenticated(): boolean {
     return !!this.getCurrentUser();
   }

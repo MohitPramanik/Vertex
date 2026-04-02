@@ -1,8 +1,10 @@
 @use "tailwindcss";
+@use "variables" as *;
 
 .sidebar {
-    @apply bg-blue-400 md:relative absolute left-0 overflow-y-auto h-full w-[14rem];
+    @apply md:relative absolute left-0 overflow-y-auto h-full w-[14rem];
     transition: all 0.5s;
+    background-color: $tertiary-dark;
 
     &::-webkit-scrollbar {
         width: 4px;
@@ -58,7 +60,9 @@
     }
 
     .toggle-btn {
+        @apply sticky top-0 w-full py-2 px-3 text-white cursor-pointer text-right z-100;
         transition: all 0.5s;
+        background-color: $secondary-dark;
     }
 
     details a {
@@ -91,13 +95,14 @@
     }
 
     .sidebar-list-item {
-        @apply text-white border-b-1 border-black hover:bg-blue-600 cursor-pointer;
+        @apply text-white border-b-1 border-black cursor-pointer;
 
         a {
             transition: padding-left 0.2s linear;
         }
 
         &:hover {
+            background-color: $secondary-dark;
             a {
                 padding-left: 2rem;
             }

@@ -1,9 +1,10 @@
 @use "tailwindcss";
+@use "variables" as *;
 
 .header-bar {
-  @apply bg-blue-700;
+  background-color: $primary-dark;
 }
 
 .logo {
-  mix-blend-mode: hard-light;
+  mix-blend-mode: difference;
 }

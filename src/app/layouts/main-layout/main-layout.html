@@ -6,15 +6,23 @@
     <!-- body -->
     <main class="flex flex-1 overflow-hidden">
 
-        <!-- sidebar -->
-        <div class="h-full relative md:pl-0 pl-[3rem]" app-sidebar></div>
-
-        <!-- body content -->
-        <div class="flex-1 overflow-y-scroll app-content-area">
-            <div class="max-w-[68rem] min-h-full m-auto p-5">
+        @if(role !== "candidate") {
+            <!-- sidebar -->
+            <div class="h-full relative md:pl-0 pl-[3rem]" app-sidebar></div>
+           
+            <!-- body content -->
+            <div class="flex-1 overflow-y-scroll app-content-area">
+                <div class="max-w-[68rem] min-h-full m-auto p-5">
+                    <router-outlet></router-outlet>
+                </div>
+            </div>
+        }
+        @else {
+            <div class="flex-1 overflow-y-scroll app-content-area">
                 <router-outlet></router-outlet>
             </div>
-        </div>
+        }
+
         
     </main>
 

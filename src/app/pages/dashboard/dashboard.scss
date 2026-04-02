@@ -1,25 +1,32 @@
 @use "tailwindcss";
+@use "variables" as *;
 
 .app-dashboard-card {
-    @apply border sm:h-[12rem] h-[9rem] 
-           p-[2rem] rounded-[10px] cursor-pointer 
-           flex justify-center items-center flex-col 
-           text-center text-white 
-           bg-linear-to-bl from-violet-500 to-fuchsia-500 
-           hover:shadow-md hover:translate-y-[-3%] 
-           transition duration-300;
+    @apply border sm:h-[12rem] h-[9rem] p-[2rem] 
+        rounded-[10px] cursor-pointer 
+        flex justify-center items-center flex-col 
+        text-center text-white 
+        bg-linear-to-bl from-[#0773c1] to-[#1f0650] 
+        hover:shadow-md hover:translate-y-[-3%] 
+        transition duration-300;
 }
 
 .tab-btn {
     width: 10rem;
     max-width: 10rem;
-    border: 2px solid #078fda;
+    border: 2px solid $algae-green;
     background: none;
-    color: #078fda;
+    color: $algae-green;
     flex: 1;
 
-    &.active, &:hover {
-        background-color: #078fda;
+    &.active {
+        background-color: $algae-green;
         color: white;
+    }
+
+    &:hover {
+        color: white;
+        background-color: $algae-green-secondary;
+        border: 2px solid $algae-green-secondary;
     }
 }

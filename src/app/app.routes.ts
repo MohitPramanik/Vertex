@@ -143,6 +143,12 @@ export const routes: Routes = [
                 loadComponent: () => import("./pages/reports/reports").then(m => m.Reports),
                 title: "Vertex - Reports",
                 data: { role: ["admin", "superAdmin"] }
+            },
+            {
+                path: "candidate-jobs",
+                loadComponent: () => import("./pages/candidate-jobs/candidate-jobs").then(m => m.CandidateJobsPage),
+                title: "Vertex - Candidate Jobs",
+                data: { role: ["candidate"] }
             }
         ]
     },

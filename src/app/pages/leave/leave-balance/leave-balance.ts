@@ -12,7 +12,7 @@ interface ILeaveBalance {
 
 @Component({
   selector: 'section[leave-balance]',
-  imports: [FormsModule, Table, TableHeaderContentArea],
+  imports: [FormsModule, Table],
   templateUrl: './leave-balance.html',
   styleUrl: './leave-balance.scss',
 })
