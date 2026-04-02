@@ -1,4 +1,4 @@
-# HR Management Portal
+# Vertex - HR Management Portal
 
 An Angular 21 HR management portal prototype for common people-ops workflows such as employee management, attendance tracking, leave handling, payroll views, recruitment, and company settings.
 
